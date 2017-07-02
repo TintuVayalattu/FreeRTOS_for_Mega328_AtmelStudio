@@ -2,10 +2,10 @@ Source/queue.d Source/queue.o: ../Source/queue.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
- c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/FreeRTOS.h \
+ ../Source/include/FreeRTOS.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
- c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Demo\AVR_AT~1/FreeRTOSConfig.h \
+ ../Demo/AVR_ATMega328p_WinAVR/FreeRTOSConfig.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -15,15 +15,12 @@ Source/queue.d Source/queue.o: ../Source/queue.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/projdefs.h \
- c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/portable.h \
- c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/deprecated_definitions.h \
- ../Source/portable/GCC/ATMega323/portmacro.h \
- c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/mpu_wrappers.h \
- c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/task.h \
- c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/list.h \
- c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/queue.h \
- c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/croutine.h
+ ../Source/include/projdefs.h ../Source/include/portable.h \
+ ../Source/include/deprecated_definitions.h \
+ ../Source/portable/GCC/ATMega328/portmacro.h \
+ ../Source/include/mpu_wrappers.h ../Source/include/task.h \
+ ../Source/include/list.h ../Source/include/queue.h \
+ ../Source/include/croutine.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
@@ -31,13 +28,13 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:
 
-c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/FreeRTOS.h:
+../Source/include/FreeRTOS.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
 
-c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Demo\AVR_AT~1/FreeRTOSConfig.h:
+../Demo/AVR_ATMega328p_WinAVR/FreeRTOSConfig.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -57,20 +54,20 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
-c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/projdefs.h:
+../Source/include/projdefs.h:
 
-c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/portable.h:
+../Source/include/portable.h:
 
-c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/deprecated_definitions.h:
+../Source/include/deprecated_definitions.h:
 
-../Source/portable/GCC/ATMega323/portmacro.h:
+../Source/portable/GCC/ATMega328/portmacro.h:
 
-c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/mpu_wrappers.h:
+../Source/include/mpu_wrappers.h:
 
-c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/task.h:
+../Source/include/task.h:
 
-c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/list.h:
+../Source/include/list.h:
 
-c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/queue.h:
+../Source/include/queue.h:
 
-c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Source\include/croutine.h:
+../Source/include/croutine.h:

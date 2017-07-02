@@ -1,7 +1,7 @@
 Demo/AVR_ATMega328p_WinAVR/analog/adc_basic.d \
  Demo/AVR_ATMega328p_WinAVR/analog/adc_basic.o: \
  ../Demo/AVR_ATMega328p_WinAVR/analog/adc_basic.c \
- c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Demo\Common\include/adc_basic.h \
+ ../Demo/Common/include/adc_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -18,7 +18,7 @@ Demo/AVR_ATMega328p_WinAVR/analog/adc_basic.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h
 
-c:\users\tintu\DOCUME~1\ATMELS~1\7.0\FREERT~1\FREERT~1\Demo\Common\include/adc_basic.h:
+../Demo/Common/include/adc_basic.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 

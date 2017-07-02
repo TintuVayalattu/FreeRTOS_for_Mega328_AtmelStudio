@@ -1,0 +1,334 @@
+   1               		.file	"crflash.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	xAreFlashCoRoutinesStillRunning
+  18               	xAreFlashCoRoutinesStillRunning:
+  19               	.LFB5:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 8091 0000 		lds r24,xCoRoutineFlashStatus
+  25               	/* epilogue start */
+  26 0004 0895      		ret
+  27               	.LFE5:
+  29               	.global	vStartFlashCoRoutines
+  31               	vStartFlashCoRoutines:
+  32               	.LFB2:
+  33               	.LM3:
+  34               	.LVL0:
+  35 0006 0F93      		push r16
+  36 0008 1F93      		push r17
+  37               	/* prologue: function */
+  38               	/* frame size = 0 */
+  39 000a 082F      		mov r16,r24
+  40               	.LM4:
+  41 000c 8930      		cpi r24,lo8(9)
+  42 000e 00F0      		brlo .L4
+  43 0010 08E0      		ldi r16,lo8(8)
+  44               	.LVL1:
+  45               	.L4:
+  46               	.LM5:
+  47 0012 81E0      		ldi r24,lo8(1)
+  48 0014 61E0      		ldi r22,lo8(1)
+  49 0016 40E0      		ldi r20,lo8(0)
+  50 0018 0E94 0000 		call xQueueGenericCreate
+  51 001c 9093 0000 		sts (xFlashQueue)+1,r25
+  52 0020 8093 0000 		sts xFlashQueue,r24
+  53               	.LM6:
+  54 0024 892B      		or r24,r25
+  55 0026 01F0      		breq .L8
+  56 0028 10E0      		ldi r17,lo8(0)
+  57               	.LVL2:
+  58 002a 00C0      		rjmp .L6
+  59               	.L7:
+  60               	.LM7:
+  61 002c 80E0      		ldi r24,lo8(gs(prvFixedDelayCoRoutine))
+  62 002e 90E0      		ldi r25,hi8(gs(prvFixedDelayCoRoutine))
+  63 0030 60E0      		ldi r22,lo8(0)
+  64 0032 412F      		mov r20,r17
+  65 0034 0E94 0000 		call xCoRoutineCreate
+  66               	.LM8:
+  67 0038 1F5F      		subi r17,lo8(-(1))
+  68               	.L6:
+  69 003a 1017      		cp r17,r16
+  70 003c 00F0      		brlo .L7
+  71               	.LM9:
+  72 003e 80E0      		ldi r24,lo8(gs(prvFlashCoRoutine))
+  73 0040 90E0      		ldi r25,hi8(gs(prvFlashCoRoutine))
+  74 0042 61E0      		ldi r22,lo8(1)
+  75 0044 40E0      		ldi r20,lo8(0)
+  76 0046 0E94 0000 		call xCoRoutineCreate
+  77               	.L8:
+  78               	/* epilogue start */
+  79               	.LM10:
+  80 004a 1F91      		pop r17
+  81               	.LVL3:
+  82 004c 0F91      		pop r16
+  83               	.LVL4:
+  84 004e 0895      		ret
+  85               	.LFE2:
+  88               	prvFlashCoRoutine:
+  89               	.LFB4:
+  90               	.LM11:
+  91               	.LVL5:
+  92 0050 0F93      		push r16
+  93 0052 1F93      		push r17
+  94 0054 DF93      		push r29
+  95 0056 CF93      		push r28
+  96 0058 0F92      		push __tmp_reg__
+  97 005a CDB7      		in r28,__SP_L__
+  98 005c DEB7      		in r29,__SP_H__
+  99               	/* prologue: function */
+ 100               	/* frame size = 1 */
+ 101               	.LM12:
+ 102 005e 8C01      		movw r16,r24
+ 103               	.LVL6:
+ 104 0060 FC01      		movw r30,r24
+ 105 0062 808D      		ldd r24,Z+24
+ 106 0064 918D      		ldd r25,Z+25
+ 107 0066 F1E0      		ldi r31,hi8(450)
+ 108 0068 823C      		cpi r24,lo8(450)
+ 109 006a 9F07      		cpc r25,r31
+ 110 006c 01F0      		breq .L12
+ 111 006e 21E0      		ldi r18,hi8(451)
+ 112 0070 833C      		cpi r24,lo8(451)
+ 113 0072 9207      		cpc r25,r18
+ 114 0074 01F0      		breq .L13
+ 115 0076 892B      		or r24,r25
+ 116 0078 01F4      		brne .L16
+ 117               	.LVL7:
+ 118               	.L11:
+ 119               	.LM13:
+ 120 007a 8091 0000 		lds r24,xFlashQueue
+ 121 007e 9091 0000 		lds r25,(xFlashQueue)+1
+ 122               	.LVL8:
+ 123 0082 BE01      		movw r22,r28
+ 124               	.LVL9:
+ 125 0084 6F5F      		subi r22,lo8(-(1))
+ 126 0086 7F4F      		sbci r23,hi8(-(1))
+ 127 0088 4FEF      		ldi r20,lo8(-1)
+ 128 008a 5FEF      		ldi r21,hi8(-1)
+ 129 008c 0E94 0000 		call xQueueCRReceive
+ 130 0090 8C3F      		cpi r24,lo8(-4)
+ 131               	.LVL10:
+ 132 0092 01F4      		brne .L14
+ 133 0094 82EC      		ldi r24,lo8(450)
+ 134 0096 91E0      		ldi r25,hi8(450)
+ 135               	.LVL11:
+ 136 0098 00C0      		rjmp .L17
+ 137               	.LVL12:
+ 138               	.L12:
+ 139 009a 8091 0000 		lds r24,xFlashQueue
+ 140 009e 9091 0000 		lds r25,(xFlashQueue)+1
+ 141 00a2 BE01      		movw r22,r28
+ 142               	.LVL13:
+ 143 00a4 6F5F      		subi r22,lo8(-(1))
+ 144 00a6 7F4F      		sbci r23,hi8(-(1))
+ 145 00a8 40E0      		ldi r20,lo8(0)
+ 146 00aa 50E0      		ldi r21,hi8(0)
+ 147 00ac 0E94 0000 		call xQueueCRReceive
+ 148               	.LVL14:
+ 149               	.L14:
+ 150 00b0 8B3F      		cpi r24,lo8(-5)
+ 151 00b2 01F4      		brne .L15
+ 152 00b4 83EC      		ldi r24,lo8(451)
+ 153 00b6 91E0      		ldi r25,hi8(451)
+ 154               	.LVL15:
+ 155               	.L17:
+ 156 00b8 F801      		movw r30,r16
+ 157 00ba 918F      		std Z+25,r25
+ 158 00bc 808F      		std Z+24,r24
+ 159 00be 00C0      		rjmp .L16
+ 160               	.LVL16:
+ 161               	.L15:
+ 162               	.LM14:
+ 163 00c0 8130      		cpi r24,lo8(1)
+ 164 00c2 01F0      		breq .L13
+ 165               	.LM15:
+ 166 00c4 1092 0000 		sts xCoRoutineFlashStatus,__zero_reg__
+ 167 00c8 00C0      		rjmp .L11
+ 168               	.LVL17:
+ 169               	.L13:
+ 170               	.LM16:
+ 171 00ca 8981      		ldd r24,Y+1
+ 172               	.LVL18:
+ 173 00cc 0E94 0000 		call vParTestToggleLED
+ 174               	.LVL19:
+ 175 00d0 00C0      		rjmp .L11
+ 176               	.LVL20:
+ 177               	.L16:
+ 178               	/* epilogue start */
+ 179               	.LM17:
+ 180 00d2 0F90      		pop __tmp_reg__
+ 181 00d4 CF91      		pop r28
+ 182 00d6 DF91      		pop r29
+ 183 00d8 1F91      		pop r17
+ 184 00da 0F91      		pop r16
+ 185 00dc 0895      		ret
+ 186               	.LFE4:
+ 189               	prvFixedDelayCoRoutine:
+ 190               	.LFB3:
+ 191               	.LM18:
+ 192               	.LVL21:
+ 193 00de 0F93      		push r16
+ 194 00e0 1F93      		push r17
+ 195 00e2 DF93      		push r29
+ 196 00e4 CF93      		push r28
+ 197 00e6 0F92      		push __tmp_reg__
+ 198 00e8 CDB7      		in r28,__SP_L__
+ 199 00ea DEB7      		in r29,__SP_H__
+ 200               	/* prologue: function */
+ 201               	/* frame size = 1 */
+ 202 00ec 6983      		std Y+1,r22
+ 203               	.LM19:
+ 204 00ee 8C01      		movw r16,r24
+ 205               	.LVL22:
+ 206 00f0 FC01      		movw r30,r24
+ 207 00f2 808D      		ldd r24,Z+24
+ 208 00f4 918D      		ldd r25,Z+25
+ 209 00f6 F1E0      		ldi r31,hi8(386)
+ 210 00f8 8238      		cpi r24,lo8(386)
+ 211 00fa 9F07      		cpc r25,r31
+ 212 00fc 01F0      		breq .L21
+ 213               	.LVL23:
+ 214 00fe 21E0      		ldi r18,hi8(387)
+ 215 0100 8338      		cpi r24,lo8(387)
+ 216 0102 9207      		cpc r25,r18
+ 217 0104 00F4      		brsh .L23
+ 218 0106 892B      		or r24,r25
+ 219 0108 01F0      		breq .L20
+ 220 010a 00C0      		rjmp .L27
+ 221               	.L23:
+ 222 010c E1E0      		ldi r30,hi8(387)
+ 223 010e 8338      		cpi r24,lo8(387)
+ 224 0110 9E07      		cpc r25,r30
+ 225 0112 01F0      		breq .L22
+ 226 0114 8659      		subi r24,lo8(406)
+ 227 0116 9140      		sbci r25,hi8(406)
+ 228 0118 01F4      		brne .L27
+ 229               	.L20:
+ 230               	.LM20:
+ 231 011a 8091 0000 		lds r24,xFlashQueue
+ 232 011e 9091 0000 		lds r25,(xFlashQueue)+1
+ 233 0122 BE01      		movw r22,r28
+ 234 0124 6F5F      		subi r22,lo8(-(1))
+ 235 0126 7F4F      		sbci r23,hi8(-(1))
+ 236 0128 40E0      		ldi r20,lo8(0)
+ 237 012a 50E0      		ldi r21,hi8(0)
+ 238 012c 0E94 0000 		call xQueueCRSend
+ 239 0130 8C3F      		cpi r24,lo8(-4)
+ 240               	.LVL24:
+ 241 0132 01F4      		brne .L24
+ 242 0134 82E8      		ldi r24,lo8(386)
+ 243 0136 91E0      		ldi r25,hi8(386)
+ 244               	.LVL25:
+ 245 0138 00C0      		rjmp .L28
+ 246               	.LVL26:
+ 247               	.L21:
+ 248 013a 8091 0000 		lds r24,xFlashQueue
+ 249 013e 9091 0000 		lds r25,(xFlashQueue)+1
+ 250 0142 BE01      		movw r22,r28
+ 251 0144 6F5F      		subi r22,lo8(-(1))
+ 252 0146 7F4F      		sbci r23,hi8(-(1))
+ 253 0148 40E0      		ldi r20,lo8(0)
+ 254 014a 50E0      		ldi r21,hi8(0)
+ 255 014c 0E94 0000 		call xQueueCRSend
+ 256               	.LVL27:
+ 257               	.L24:
+ 258 0150 8B3F      		cpi r24,lo8(-5)
+ 259 0152 01F4      		brne .L25
+ 260 0154 83E8      		ldi r24,lo8(387)
+ 261 0156 91E0      		ldi r25,hi8(387)
+ 262               	.LVL28:
+ 263 0158 00C0      		rjmp .L28
+ 264               	.LVL29:
+ 265               	.L25:
+ 266               	.LM21:
+ 267 015a 8130      		cpi r24,lo8(1)
+ 268 015c 01F0      		breq .L22
+ 269               	.LM22:
+ 270 015e 1092 0000 		sts xCoRoutineFlashStatus,__zero_reg__
+ 271               	.LVL30:
+ 272               	.L22:
+ 273               	.LM23:
+ 274 0162 E981      		ldd r30,Y+1
+ 275 0164 F0E0      		ldi r31,lo8(0)
+ 276               	.LVL31:
+ 277 0166 EE0F      		lsl r30
+ 278 0168 FF1F      		rol r31
+ 279               	.LVL32:
+ 280 016a E050      		subi r30,lo8(-(xFlashRates.1483))
+ 281 016c F040      		sbci r31,hi8(-(xFlashRates.1483))
+ 282               	.LVL33:
+ 283 016e 8081      		ld r24,Z
+ 284 0170 9181      		ldd r25,Z+1
+ 285 0172 0097      		sbiw r24,0
+ 286 0174 01F0      		breq .L26
+ 287 0176 60E0      		ldi r22,lo8(0)
+ 288 0178 70E0      		ldi r23,hi8(0)
+ 289 017a 0E94 0000 		call vCoRoutineAddToDelayedList
+ 290               	.LVL34:
+ 291               	.L26:
+ 292 017e 86E9      		ldi r24,lo8(406)
+ 293 0180 91E0      		ldi r25,hi8(406)
+ 294               	.LVL35:
+ 295               	.L28:
+ 296 0182 F801      		movw r30,r16
+ 297 0184 918F      		std Z+25,r25
+ 298 0186 808F      		std Z+24,r24
+ 299               	.LVL36:
+ 300               	.L27:
+ 301               	/* epilogue start */
+ 302               	.LM24:
+ 303 0188 0F90      		pop __tmp_reg__
+ 304 018a CF91      		pop r28
+ 305 018c DF91      		pop r29
+ 306 018e 1F91      		pop r17
+ 307 0190 0F91      		pop r16
+ 308 0192 0895      		ret
+ 309               	.LFE3:
+ 311               		.data
+ 314               	xCoRoutineFlashStatus:
+ 315 0000 01        		.byte	1
+ 318               	xFlashRates.1483:
+ 319 0001 9600      		.word	150
+ 320 0003 C800      		.word	200
+ 321 0005 FA00      		.word	250
+ 322 0007 2C01      		.word	300
+ 323 0009 5E01      		.word	350
+ 324 000b 9001      		.word	400
+ 325 000d C201      		.word	450
+ 326 000f F401      		.word	500
+ 327               		.lcomm xFlashQueue,2
+ 376               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 crflash.c
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:2      *ABS*:0000003f __SREG__
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:5      *ABS*:00000034 __CCP__
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:18     .text:00000000 xAreFlashCoRoutinesStillRunning
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:314    .data:00000000 xCoRoutineFlashStatus
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:31     .text:00000006 vStartFlashCoRoutines
+                             .bss:00000000 xFlashQueue
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:189    .text:000000de prvFixedDelayCoRoutine
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:88     .text:00000050 prvFlashCoRoutine
+C:\Users\Tintu\AppData\Local\Temp/ccvCryAd.s:318    .data:00000001 xFlashRates.1483
+
+UNDEFINED SYMBOLS
+xQueueGenericCreate
+xCoRoutineCreate
+xQueueCRReceive
+vParTestToggleLED
+xQueueCRSend
+vCoRoutineAddToDelayedList
+__do_copy_data
+__do_clear_bss

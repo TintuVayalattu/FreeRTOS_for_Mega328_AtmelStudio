@@ -1,0 +1,350 @@
+   1               		.file	"main.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	vApplicationIdleHook
+  18               	vApplicationIdleHook:
+  19               	.LFB9:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 0E94 0000 		call vCoRoutineSchedule
+  25               	/* epilogue start */
+  26               	.LM3:
+  27 0004 0895      		ret
+  28               	.LFE9:
+  30               		.data
+  31               	.LC0:
+  32 0000 4368 6563 		.string	"Check"
+  32      6B00 
+  33               		.text
+  34               	.global	main
+  36               	main:
+  37               	.LFB5:
+  38               	.LM4:
+  39 0006 EF92      		push r14
+  40 0008 FF92      		push r15
+  41 000a 0F93      		push r16
+  42 000c DF93      		push r29
+  43 000e CF93      		push r28
+  44 0010 0F92      		push __tmp_reg__
+  45 0012 CDB7      		in r28,__SP_L__
+  46 0014 DEB7      		in r29,__SP_H__
+  47               	/* prologue: function */
+  48               	/* frame size = 1 */
+  49               	.LBB6:
+  50               	.LBB7:
+  51               	.LM5:
+  52 0016 CE01      		movw r24,r28
+  53 0018 0196      		adiw r24,1
+  54 001a 60E5      		ldi r22,lo8(80)
+  55 001c 70E0      		ldi r23,hi8(80)
+  56 001e 41E0      		ldi r20,lo8(1)
+  57 0020 50E0      		ldi r21,hi8(1)
+  58 0022 0E94 0000 		call __eerd_block_m328p
+  59               	.LM6:
+  60 0026 6981      		ldd r22,Y+1
+  61               	.LVL0:
+  62 0028 6F5F      		subi r22,lo8(-(1))
+  63 002a 6983      		std Y+1,r22
+  64               	.LVL1:
+  65               	.LM7:
+  66 002c 80E5      		ldi r24,lo8(80)
+  67 002e 90E0      		ldi r25,hi8(80)
+  68 0030 0E94 0000 		call __eewr_byte_m328p
+  69               	.LBE7:
+  70               	.LBE6:
+  71               	.LM8:
+  72 0034 0E94 0000 		call vParTestInitialise
+  73               	.LM9:
+  74 0038 80E0      		ldi r24,lo8(0)
+  75 003a 0E94 0000 		call vStartIntegerMathTasks
+  76               	.LM10:
+  77 003e 82E0      		ldi r24,lo8(2)
+  78 0040 40E0      		ldi r20,lo8(38400)
+  79 0042 56E9      		ldi r21,hi8(38400)
+  80 0044 60E0      		ldi r22,hlo8(38400)
+  81 0046 70E0      		ldi r23,hhi8(38400)
+  82 0048 24E0      		ldi r18,lo8(4)
+  83 004a 0E94 0000 		call vAltStartComTestTasks
+  84               	.LM11:
+  85 004e 82E0      		ldi r24,lo8(2)
+  86 0050 0E94 0000 		call vStartPolledQueueTasks
+  87               	.LM12:
+  88 0054 0E94 0000 		call vStartRegTestTasks
+  89               	.LM13:
+  90 0058 80E0      		ldi r24,lo8(gs(vErrorChecks))
+  91 005a 90E0      		ldi r25,hi8(gs(vErrorChecks))
+  92 005c 60E0      		ldi r22,lo8(.LC0)
+  93 005e 70E0      		ldi r23,hi8(.LC0)
+  94 0060 45E5      		ldi r20,lo8(85)
+  95 0062 50E0      		ldi r21,hi8(85)
+  96 0064 20E0      		ldi r18,lo8(0)
+  97 0066 30E0      		ldi r19,hi8(0)
+  98 0068 03E0      		ldi r16,lo8(3)
+  99 006a EE24      		clr r14
+ 100 006c FF24      		clr r15
+ 101 006e 0E94 0000 		call xTaskCreate
+ 102               	.LM14:
+ 103 0072 83E0      		ldi r24,lo8(3)
+ 104 0074 0E94 0000 		call vStartFlashCoRoutines
+ 105               	.LM15:
+ 106 0078 0E94 0000 		call vTaskStartScheduler
+ 107               	.LM16:
+ 108 007c 80E0      		ldi r24,lo8(0)
+ 109 007e 90E0      		ldi r25,hi8(0)
+ 110               	/* epilogue start */
+ 111 0080 0F90      		pop __tmp_reg__
+ 112 0082 CF91      		pop r28
+ 113 0084 DF91      		pop r29
+ 114 0086 0F91      		pop r16
+ 115 0088 FF90      		pop r15
+ 116 008a EF90      		pop r14
+ 117 008c 0895      		ret
+ 118               	.LFE5:
+ 121               	vErrorChecks:
+ 122               	.LFB6:
+ 123               	.LM17:
+ 124               	.LVL2:
+ 125 008e 1F93      		push r17
+ 126               	/* prologue: function */
+ 127               	/* frame size = 0 */
+ 128               	.LBB8:
+ 129               	.LBB9:
+ 130               	.LM18:
+ 131 0090 11E0      		ldi r17,lo8(1)
+ 132               	.L11:
+ 133               	.LBE9:
+ 134               	.LBE8:
+ 135               	.LM19:
+ 136 0092 84EF      		ldi r24,lo8(500)
+ 137 0094 91E0      		ldi r25,hi8(500)
+ 138               	.LVL3:
+ 139 0096 0E94 0000 		call vTaskDelay
+ 140               	.LM20:
+ 141 009a 2091 0000 		lds r18,ulDummyVariable.2166
+ 142 009e 3091 0000 		lds r19,(ulDummyVariable.2166)+1
+ 143 00a2 4091 0000 		lds r20,(ulDummyVariable.2166)+2
+ 144 00a6 5091 0000 		lds r21,(ulDummyVariable.2166)+3
+ 145 00aa DA01      		movw r26,r20
+ 146 00ac C901      		movw r24,r18
+ 147 00ae 880F      		lsl r24
+ 148 00b0 991F      		rol r25
+ 149 00b2 AA1F      		rol r26
+ 150 00b4 BB1F      		rol r27
+ 151 00b6 820F      		add r24,r18
+ 152 00b8 931F      		adc r25,r19
+ 153 00ba A41F      		adc r26,r20
+ 154 00bc B51F      		adc r27,r21
+ 155 00be 8093 0000 		sts ulDummyVariable.2166,r24
+ 156 00c2 9093 0000 		sts (ulDummyVariable.2166)+1,r25
+ 157 00c6 A093 0000 		sts (ulDummyVariable.2166)+2,r26
+ 158 00ca B093 0000 		sts (ulDummyVariable.2166)+3,r27
+ 159               	.LBB11:
+ 160               	.LM21:
+ 161 00ce 0E94 0000 		call xAreComTestTasksStillRunning
+ 162               	.LBB10:
+ 163 00d2 8130      		cpi r24,lo8(1)
+ 164 00d4 01F0      		breq .L6
+ 165               	.LM22:
+ 166 00d6 1093 0000 		sts xErrorHasOccurred.2173,r17
+ 167               	.L6:
+ 168               	.LM23:
+ 169 00da 8091 0000 		lds r24,xErrorHasOccurred.2173
+ 170 00de 8823      		tst r24
+ 171 00e0 01F4      		brne .L11
+ 172               	.LM24:
+ 173 00e2 85E0      		ldi r24,lo8(5)
+ 174 00e4 0E94 0000 		call vParTestToggleLED
+ 175 00e8 00C0      		rjmp .L11
+ 176               	.LBE10:
+ 177               	.LBE11:
+ 178               	.LFE6:
+ 180               	.global	print
+ 182               	print:
+ 183               	.LFB3:
+ 184               	.LM25:
+ 185               	.LVL4:
+ 186 00ea EF92      		push r14
+ 187 00ec FF92      		push r15
+ 188 00ee 0F93      		push r16
+ 189 00f0 1F93      		push r17
+ 190 00f2 CF93      		push r28
+ 191 00f4 DF93      		push r29
+ 192               	/* prologue: function */
+ 193               	/* frame size = 0 */
+ 194 00f6 7C01      		movw r14,r24
+ 195 00f8 8B01      		movw r16,r22
+ 196               	.LM26:
+ 197 00fa C0E0      		ldi r28,lo8(0)
+ 198 00fc D0E0      		ldi r29,hi8(0)
+ 199               	.LVL5:
+ 200 00fe 00C0      		rjmp .L13
+ 201               	.LVL6:
+ 202               	.L14:
+ 203               	.LM27:
+ 204 0100 F701      		movw r30,r14
+ 205 0102 EC0F      		add r30,r28
+ 206 0104 FD1F      		adc r31,r29
+ 207 0106 80E0      		ldi r24,lo8(0)
+ 208 0108 90E0      		ldi r25,hi8(0)
+ 209 010a 6081      		ld r22,Z
+ 210 010c 40E0      		ldi r20,lo8(0)
+ 211 010e 50E0      		ldi r21,hi8(0)
+ 212 0110 0E94 0000 		call xSerialPutChar
+ 213               	.LM28:
+ 214 0114 2196      		adiw r28,1
+ 215               	.LVL7:
+ 216               	.L13:
+ 217 0116 C017      		cp r28,r16
+ 218 0118 D107      		cpc r29,r17
+ 219 011a 00F0      		brlo .L14
+ 220               	/* epilogue start */
+ 221               	.LM29:
+ 222 011c DF91      		pop r29
+ 223 011e CF91      		pop r28
+ 224               	.LVL8:
+ 225 0120 1F91      		pop r17
+ 226 0122 0F91      		pop r16
+ 227               	.LVL9:
+ 228 0124 FF90      		pop r15
+ 229 0126 EF90      		pop r14
+ 230               	.LVL10:
+ 231 0128 0895      		ret
+ 232               	.LFE3:
+ 234               		.data
+ 235               	.LC1:
+ 236 0006 5465 6D70 		.string	"Temperature = %d *C\r\n"
+ 236      6572 6174 
+ 236      7572 6520 
+ 236      3D20 2564 
+ 236      202A 430D 
+ 237               		.text
+ 238               	.global	DisplayTemp
+ 240               	DisplayTemp:
+ 241               	.LFB4:
+ 242               	.LM30:
+ 243 012a 0F93      		push r16
+ 244 012c 1F93      		push r17
+ 245 012e CF93      		push r28
+ 246 0130 DF93      		push r29
+ 247               	/* prologue: function */
+ 248               	/* frame size = 0 */
+ 249               	.LM31:
+ 250 0132 0E94 0000 		call ADC_0_init
+ 251               	.LM32:
+ 252 0136 60E0      		ldi r22,lo8(38400)
+ 253 0138 76E9      		ldi r23,hi8(38400)
+ 254 013a 80E0      		ldi r24,hlo8(38400)
+ 255 013c 90E0      		ldi r25,hhi8(38400)
+ 256 013e 44E6      		ldi r20,lo8(100)
+ 257 0140 0E94 0000 		call xSerialPortInitMinimal
+ 258               	.LM33:
+ 259 0144 C0E0      		ldi r28,lo8(MsgBuff.2153)
+ 260 0146 D0E0      		ldi r29,hi8(MsgBuff.2153)
+ 261 0148 00E0      		ldi r16,lo8(.LC1)
+ 262 014a 10E0      		ldi r17,hi8(.LC1)
+ 263               	.L17:
+ 264               	.LM34:
+ 265 014c 84EF      		ldi r24,lo8(500)
+ 266 014e 91E0      		ldi r25,hi8(500)
+ 267 0150 0E94 0000 		call vTaskDelay
+ 268               	.LM35:
+ 269 0154 80E0      		ldi r24,lo8(0)
+ 270 0156 0E94 0000 		call ADC_0_get_conversion
+ 271 015a 8093 0000 		sts res.2152,r24
+ 272 015e 9093 0000 		sts res.2152+1,r25
+ 273               	.LM36:
+ 274 0162 00D0      		rcall .
+ 275 0164 00D0      		rcall .
+ 276 0166 00D0      		rcall .
+ 277 0168 EDB7      		in r30,__SP_L__
+ 278 016a FEB7      		in r31,__SP_H__
+ 279 016c 3196      		adiw r30,1
+ 280 016e ADB7      		in r26,__SP_L__
+ 281 0170 BEB7      		in r27,__SP_H__
+ 282 0172 1296      		adiw r26,1+1
+ 283 0174 DC93      		st X,r29
+ 284 0176 CE93      		st -X,r28
+ 285 0178 1197      		sbiw r26,1
+ 286 017a 1383      		std Z+3,r17
+ 287 017c 0283      		std Z+2,r16
+ 288 017e 8483      		std Z+4,r24
+ 289 0180 9583      		std Z+5,r25
+ 290 0182 0E94 0000 		call sprintf
+ 291               	.LM37:
+ 292 0186 FE01      		movw r30,r28
+ 293 0188 0190      		ld __tmp_reg__,Z+
+ 294 018a 0020      		tst __tmp_reg__
+ 295 018c 01F4      		brne .-6
+ 296 018e 3197      		sbiw r30,1
+ 297 0190 E050      		subi r30,lo8(MsgBuff.2153)
+ 298 0192 F040      		sbci r31,hi8(MsgBuff.2153)
+ 299 0194 8DB7      		in r24,__SP_L__
+ 300 0196 9EB7      		in r25,__SP_H__
+ 301 0198 0696      		adiw r24,6
+ 302 019a 0FB6      		in __tmp_reg__,__SREG__
+ 303 019c F894      		cli
+ 304 019e 9EBF      		out __SP_H__,r25
+ 305 01a0 0FBE      		out __SREG__,__tmp_reg__
+ 306 01a2 8DBF      		out __SP_L__,r24
+ 307 01a4 CE01      		movw r24,r28
+ 308 01a6 BF01      		movw r22,r30
+ 309 01a8 0E94 0000 		call print
+ 310 01ac 00C0      		rjmp .L17
+ 311               	.LFE4:
+ 313               		.data
+ 316               	ulDummyVariable.2166:
+ 317 001c 03        		.byte	3
+ 318 001d 00        		.byte	0
+ 319 001e 00        		.byte	0
+ 320 001f 00        		.byte	0
+ 321               		.lcomm xErrorHasOccurred.2173,1
+ 322               		.lcomm MsgBuff.2153,32
+ 323               		.lcomm res.2152,2
+ 380               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:2      *ABS*:0000003f __SREG__
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:5      *ABS*:00000034 __CCP__
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:18     .text:00000000 vApplicationIdleHook
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:36     .text:00000006 main
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:121    .text:0000008e vErrorChecks
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:316    .data:0000001c ulDummyVariable.2166
+                             .bss:00000000 xErrorHasOccurred.2173
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:182    .text:000000ea print
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:240    .text:0000012a DisplayTemp
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:321    .bss:00000001 MsgBuff.2153
+C:\Users\Tintu\AppData\Local\Temp/ccwtdtEc.s:322    .bss:00000021 res.2152
+
+UNDEFINED SYMBOLS
+vCoRoutineSchedule
+__eerd_block_m328p
+__eewr_byte_m328p
+vParTestInitialise
+vStartIntegerMathTasks
+vAltStartComTestTasks
+vStartPolledQueueTasks
+vStartRegTestTasks
+xTaskCreate
+vStartFlashCoRoutines
+vTaskStartScheduler
+vTaskDelay
+xAreComTestTasksStillRunning
+vParTestToggleLED
+xSerialPutChar
+ADC_0_init
+xSerialPortInitMinimal
+ADC_0_get_conversion
+sprintf
+__do_copy_data
+__do_clear_bss

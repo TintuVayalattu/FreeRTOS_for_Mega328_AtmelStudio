@@ -1,0 +1,276 @@
+   1               		.file	"comtest.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	xAreComTestTasksStillRunning
+  18               	xAreComTestTasksStillRunning:
+  19               	.LFB5:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 8091 0000 		lds r24,uxRxLoops
+  25               	.LM3:
+  26 0004 1092 0000 		sts uxRxLoops,__zero_reg__
+  27 0008 8111      		cpse r24,__zero_reg__
+  28 000a 81E0      		ldi r24,lo8(1)
+  29               	.L2:
+  30               	.LM4:
+  31 000c 0895      		ret
+  32               	.LFE5:
+  34               		.data
+  35               	.LC0:
+  36 0000 434F 4D54 		.string	"COMTx"
+  36      7800 
+  37               	.LC1:
+  38 0006 434F 4D52 		.string	"COMRx"
+  38      7800 
+  39               		.text
+  40               	.global	vAltStartComTestTasks
+  42               	vAltStartComTestTasks:
+  43               	.LFB2:
+  44               	.LM5:
+  45               	.LVL0:
+  46 000e EF92      		push r14
+  47 0010 FF92      		push r15
+  48 0012 0F93      		push r16
+  49 0014 1F93      		push r17
+  50               	/* prologue: function */
+  51               	/* frame size = 0 */
+  52 0016 182F      		mov r17,r24
+  53               	.LM6:
+  54 0018 2093 0000 		sts uxBaseLED,r18
+  55               	.LM7:
+  56 001c CB01      		movw r24,r22
+  57 001e BA01      		movw r22,r20
+  58 0020 48E1      		ldi r20,lo8(24)
+  59               	.LVL1:
+  60 0022 0E94 0000 		call xSerialPortInitMinimal
+  61               	.LVL2:
+  62               	.LM8:
+  63 0026 012F      		mov r16,r17
+  64 0028 0150      		subi r16,lo8(-(-1))
+  65 002a 80E0      		ldi r24,lo8(gs(vComTxTask))
+  66 002c 90E0      		ldi r25,hi8(gs(vComTxTask))
+  67 002e 60E0      		ldi r22,lo8(.LC0)
+  68 0030 70E0      		ldi r23,hi8(.LC0)
+  69 0032 45E5      		ldi r20,lo8(85)
+  70 0034 50E0      		ldi r21,hi8(85)
+  71 0036 20E0      		ldi r18,lo8(0)
+  72 0038 30E0      		ldi r19,hi8(0)
+  73 003a EE24      		clr r14
+  74 003c FF24      		clr r15
+  75 003e 0E94 0000 		call xTaskCreate
+  76               	.LM9:
+  77 0042 80E0      		ldi r24,lo8(gs(vComRxTask))
+  78 0044 90E0      		ldi r25,hi8(gs(vComRxTask))
+  79 0046 60E0      		ldi r22,lo8(.LC1)
+  80 0048 70E0      		ldi r23,hi8(.LC1)
+  81 004a 45E5      		ldi r20,lo8(85)
+  82 004c 50E0      		ldi r21,hi8(85)
+  83 004e 20E0      		ldi r18,lo8(0)
+  84 0050 30E0      		ldi r19,hi8(0)
+  85 0052 012F      		mov r16,r17
+  86 0054 0E94 0000 		call xTaskCreate
+  87               	/* epilogue start */
+  88               	.LM10:
+  89 0058 1F91      		pop r17
+  90               	.LVL3:
+  91 005a 0F91      		pop r16
+  92 005c FF90      		pop r15
+  93 005e EF90      		pop r14
+  94 0060 0895      		ret
+  95               	.LFE2:
+  98               	vComRxTask:
+  99               	.LFB4:
+ 100               	.LM11:
+ 101               	.LVL4:
+ 102 0062 EF92      		push r14
+ 103 0064 FF92      		push r15
+ 104 0066 0F93      		push r16
+ 105 0068 1F93      		push r17
+ 106 006a DF93      		push r29
+ 107 006c CF93      		push r28
+ 108 006e 0F92      		push __tmp_reg__
+ 109 0070 CDB7      		in r28,__SP_L__
+ 110 0072 DEB7      		in r29,__SP_H__
+ 111               	/* prologue: function */
+ 112               	/* frame size = 1 */
+ 113               	.LM12:
+ 114 0074 00E0      		ldi r16,lo8(0)
+ 115               	.LVL5:
+ 116               	.LM13:
+ 117 0076 7E01      		movw r14,r28
+ 118 0078 0894      		sec
+ 119 007a E11C      		adc r14,__zero_reg__
+ 120 007c F11C      		adc r15,__zero_reg__
+ 121               	.LVL6:
+ 122               	.L20:
+ 123               	.LM14:
+ 124 007e 11E4      		ldi r17,lo8(65)
+ 125               	.LVL7:
+ 126               	.L10:
+ 127               	.LM15:
+ 128 0080 80E0      		ldi r24,lo8(0)
+ 129 0082 90E0      		ldi r25,hi8(0)
+ 130               	.LVL8:
+ 131 0084 B701      		movw r22,r14
+ 132 0086 4FEF      		ldi r20,lo8(-1)
+ 133 0088 5FEF      		ldi r21,hi8(-1)
+ 134 008a 0E94 0000 		call xSerialGetChar
+ 135 008e 8823      		tst r24
+ 136 0090 01F0      		breq .L7
+ 137               	.LM16:
+ 138 0092 8981      		ldd r24,Y+1
+ 139 0094 8117      		cp r24,r17
+ 140 0096 01F0      		breq .L8
+ 141               	.LVL9:
+ 142 0098 11E0      		ldi r17,lo8(1)
+ 143               	.LVL10:
+ 144 009a 00C0      		rjmp .L9
+ 145               	.LVL11:
+ 146               	.L8:
+ 147               	.LM17:
+ 148 009c 8091 0000 		lds r24,uxBaseLED
+ 149               	.LVL12:
+ 150 00a0 8F5F      		subi r24,lo8(-(1))
+ 151 00a2 0E94 0000 		call vParTestToggleLED
+ 152               	.L7:
+ 153               	.LM18:
+ 154 00a6 1F5F      		subi r17,lo8(-(1))
+ 155 00a8 1935      		cpi r17,lo8(89)
+ 156 00aa 01F4      		brne .L10
+ 157 00ac 10E0      		ldi r17,lo8(0)
+ 158               	.LVL13:
+ 159               	.L9:
+ 160               	.LM19:
+ 161 00ae 8091 0000 		lds r24,uxBaseLED
+ 162 00b2 8F5F      		subi r24,lo8(-(1))
+ 163 00b4 60E0      		ldi r22,lo8(0)
+ 164 00b6 0E94 0000 		call vParTestSetLED
+ 165               	.LM20:
+ 166 00ba 1130      		cpi r17,lo8(1)
+ 167 00bc 01F4      		brne .L21
+ 168 00be 00C0      		rjmp .L19
+ 169               	.LVL14:
+ 170               	.L13:
+ 171               	.LM21:
+ 172 00c0 80E0      		ldi r24,lo8(0)
+ 173 00c2 90E0      		ldi r25,hi8(0)
+ 174               	.LVL15:
+ 175 00c4 B701      		movw r22,r14
+ 176 00c6 4FEF      		ldi r20,lo8(-1)
+ 177 00c8 5FEF      		ldi r21,hi8(-1)
+ 178 00ca 0E94 0000 		call xSerialGetChar
+ 179               	.L19:
+ 180               	.LM22:
+ 181 00ce 8981      		ldd r24,Y+1
+ 182 00d0 8835      		cpi r24,lo8(88)
+ 183 00d2 01F4      		brne .L13
+ 184               	.LVL16:
+ 185               	.LM23:
+ 186 00d4 0F5F      		subi r16,lo8(-(1))
+ 187 00d6 00C0      		rjmp .L20
+ 188               	.LVL17:
+ 189               	.L21:
+ 190               	.LM24:
+ 191 00d8 0230      		cpi r16,lo8(2)
+ 192 00da 04F4      		brge .L20
+ 193               	.LM25:
+ 194 00dc 8091 0000 		lds r24,uxRxLoops
+ 195 00e0 8F5F      		subi r24,lo8(-(1))
+ 196 00e2 8093 0000 		sts uxRxLoops,r24
+ 197 00e6 00C0      		rjmp .L20
+ 198               	.LFE4:
+ 201               	vComTxTask:
+ 202               	.LFB3:
+ 203               	.LM26:
+ 204               	.LVL18:
+ 205 00e8 1F93      		push r17
+ 206               	/* prologue: function */
+ 207               	/* frame size = 0 */
+ 208               	.LM27:
+ 209 00ea 11E4      		ldi r17,lo8(65)
+ 210               	.LVL19:
+ 211 00ec 00C0      		rjmp .L28
+ 212               	.L25:
+ 213               	.LM28:
+ 214 00ee 80E0      		ldi r24,lo8(0)
+ 215 00f0 90E0      		ldi r25,hi8(0)
+ 216               	.LVL20:
+ 217 00f2 612F      		mov r22,r17
+ 218 00f4 40E0      		ldi r20,lo8(0)
+ 219 00f6 50E0      		ldi r21,hi8(0)
+ 220 00f8 0E94 0000 		call xSerialPutChar
+ 221 00fc 8130      		cpi r24,lo8(1)
+ 222 00fe 01F4      		brne .L24
+ 223               	.LM29:
+ 224 0100 8091 0000 		lds r24,uxBaseLED
+ 225 0104 0E94 0000 		call vParTestToggleLED
+ 226               	.L24:
+ 227               	.LM30:
+ 228 0108 1F5F      		subi r17,lo8(-(1))
+ 229               	.LVL21:
+ 230               	.L28:
+ 231 010a 1935      		cpi r17,lo8(89)
+ 232 010c 04F0      		brlt .L25
+ 233               	.LM31:
+ 234 010e 8091 0000 		lds r24,uxBaseLED
+ 235               	.LVL22:
+ 236 0112 60E0      		ldi r22,lo8(0)
+ 237 0114 0E94 0000 		call vParTestSetLED
+ 238               	.LM32:
+ 239 0118 0E94 0000 		call xTaskGetTickCount
+ 240               	.LM33:
+ 241 011c 0396      		adiw r24,3
+ 242 011e 66E9      		ldi r22,lo8(150)
+ 243 0120 70E0      		ldi r23,hi8(150)
+ 244 0122 0E94 0000 		call __udivmodhi4
+ 245               	.LM34:
+ 246 0126 8233      		cpi r24,50
+ 247 0128 9105      		cpc r25,__zero_reg__
+ 248               	.LVL23:
+ 249 012a 00F4      		brsh .L26
+ 250 012c 82E3      		ldi r24,lo8(50)
+ 251 012e 90E0      		ldi r25,hi8(50)
+ 252               	.L26:
+ 253               	.LM35:
+ 254 0130 0E94 0000 		call vTaskDelay
+ 255               	.LVL24:
+ 256 0134 11E4      		ldi r17,lo8(65)
+ 257 0136 00C0      		rjmp .L25
+ 258               	.LFE3:
+ 260               		.lcomm uxRxLoops,1
+ 261               		.lcomm uxBaseLED,1
+ 310               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 comtest.c
+C:\Users\Tintu\AppData\Local\Temp/ccyxU3Xz.s:2      *ABS*:0000003f __SREG__
+C:\Users\Tintu\AppData\Local\Temp/ccyxU3Xz.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Tintu\AppData\Local\Temp/ccyxU3Xz.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Tintu\AppData\Local\Temp/ccyxU3Xz.s:5      *ABS*:00000034 __CCP__
+C:\Users\Tintu\AppData\Local\Temp/ccyxU3Xz.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccyxU3Xz.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccyxU3Xz.s:18     .text:00000000 xAreComTestTasksStillRunning
+                             .bss:00000000 uxRxLoops
+C:\Users\Tintu\AppData\Local\Temp/ccyxU3Xz.s:42     .text:0000000e vAltStartComTestTasks
+C:\Users\Tintu\AppData\Local\Temp/ccyxU3Xz.s:260    .bss:00000001 uxBaseLED
+C:\Users\Tintu\AppData\Local\Temp/ccyxU3Xz.s:201    .text:000000e8 vComTxTask
+C:\Users\Tintu\AppData\Local\Temp/ccyxU3Xz.s:98     .text:00000062 vComRxTask
+
+UNDEFINED SYMBOLS
+xSerialPortInitMinimal
+xTaskCreate
+xSerialGetChar
+vParTestToggleLED
+vParTestSetLED
+xSerialPutChar
+xTaskGetTickCount
+__udivmodhi4
+vTaskDelay
+__do_copy_data
+__do_clear_bss

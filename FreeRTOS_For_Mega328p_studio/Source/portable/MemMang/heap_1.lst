@@ -1,0 +1,137 @@
+   1               		.file	"heap_1.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	vPortFree
+  18               	vPortFree:
+  19               	.LFB3:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	/* epilogue start */
+  25               	.LM2:
+  26 0000 0895      		ret
+  27               	.LFE3:
+  29               	.global	vPortInitialiseBlocks
+  31               	vPortInitialiseBlocks:
+  32               	.LFB4:
+  33               	.LM3:
+  34               	/* prologue: function */
+  35               	/* frame size = 0 */
+  36               	.LM4:
+  37 0002 1092 0000 		sts (xNextFreeByte)+1,__zero_reg__
+  38 0006 1092 0000 		sts xNextFreeByte,__zero_reg__
+  39               	/* epilogue start */
+  40               	.LM5:
+  41 000a 0895      		ret
+  42               	.LFE4:
+  44               	.global	xPortGetFreeHeapSize
+  46               	xPortGetFreeHeapSize:
+  47               	.LFB5:
+  48               	.LM6:
+  49               	/* prologue: function */
+  50               	/* frame size = 0 */
+  51               	.LM7:
+  52 000c 2BED      		ldi r18,lo8(1499)
+  53 000e 35E0      		ldi r19,hi8(1499)
+  54 0010 8091 0000 		lds r24,xNextFreeByte
+  55 0014 9091 0000 		lds r25,(xNextFreeByte)+1
+  56 0018 281B      		sub r18,r24
+  57 001a 390B      		sbc r19,r25
+  58               	.LM8:
+  59 001c C901      		movw r24,r18
+  60               	/* epilogue start */
+  61 001e 0895      		ret
+  62               	.LFE5:
+  64               	.global	pvPortMalloc
+  66               	pvPortMalloc:
+  67               	.LFB2:
+  68               	.LM9:
+  69               	.LVL1:
+  70 0020 CF93      		push r28
+  71 0022 DF93      		push r29
+  72               	/* prologue: function */
+  73               	/* frame size = 0 */
+  74 0024 EC01      		movw r28,r24
+  75               	.LM10:
+  76 0026 0E94 0000 		call vTaskSuspendAll
+  77               	.LVL2:
+  78               	.LM11:
+  79 002a 8091 0000 		lds r24,pucAlignedHeap.1629
+  80 002e 9091 0000 		lds r25,(pucAlignedHeap.1629)+1
+  81 0032 892B      		or r24,r25
+  82 0034 01F4      		brne .L8
+  83               	.LM12:
+  84 0036 80E0      		ldi r24,lo8(ucHeap+1)
+  85 0038 90E0      		ldi r25,hi8(ucHeap+1)
+  86 003a 9093 0000 		sts (pucAlignedHeap.1629)+1,r25
+  87 003e 8093 0000 		sts pucAlignedHeap.1629,r24
+  88               	.L8:
+  89               	.LM13:
+  90 0042 2091 0000 		lds r18,xNextFreeByte
+  91 0046 3091 0000 		lds r19,(xNextFreeByte)+1
+  92 004a CE01      		movw r24,r28
+  93 004c 820F      		add r24,r18
+  94 004e 931F      		adc r25,r19
+  95 0050 45E0      		ldi r20,hi8(1499)
+  96 0052 8B3D      		cpi r24,lo8(1499)
+  97 0054 9407      		cpc r25,r20
+  98 0056 00F4      		brsh .L9
+  99 0058 2817      		cp r18,r24
+ 100 005a 3907      		cpc r19,r25
+ 101 005c 00F4      		brsh .L9
+ 102               	.LM14:
+ 103 005e C091 0000 		lds r28,pucAlignedHeap.1629
+ 104 0062 D091 0000 		lds r29,(pucAlignedHeap.1629)+1
+ 105               	.LVL3:
+ 106 0066 C20F      		add r28,r18
+ 107 0068 D31F      		adc r29,r19
+ 108               	.LM15:
+ 109 006a 9093 0000 		sts (xNextFreeByte)+1,r25
+ 110 006e 8093 0000 		sts xNextFreeByte,r24
+ 111 0072 00C0      		rjmp .L10
+ 112               	.LVL4:
+ 113               	.L9:
+ 114 0074 C0E0      		ldi r28,lo8(0)
+ 115 0076 D0E0      		ldi r29,hi8(0)
+ 116               	.LVL5:
+ 117               	.L10:
+ 118               	.LM16:
+ 119 0078 0E94 0000 		call xTaskResumeAll
+ 120               	.LM17:
+ 121 007c CE01      		movw r24,r28
+ 122               	.LVL6:
+ 123               	/* epilogue start */
+ 124 007e DF91      		pop r29
+ 125 0080 CF91      		pop r28
+ 126 0082 0895      		ret
+ 127               	.LFE2:
+ 129               		.lcomm xNextFreeByte,2
+ 130               		.lcomm pucAlignedHeap.1629,2
+ 131               		.lcomm ucHeap,1500
+ 180               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 heap_1.c
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:2      *ABS*:0000003f __SREG__
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:5      *ABS*:00000034 __CCP__
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:18     .text:00000000 vPortFree
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:31     .text:00000002 vPortInitialiseBlocks
+                             .bss:00000000 xNextFreeByte
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:46     .text:0000000c xPortGetFreeHeapSize
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:66     .text:00000020 pvPortMalloc
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:129    .bss:00000002 pucAlignedHeap.1629
+C:\Users\Tintu\AppData\Local\Temp/ccVBsJ4O.s:130    .bss:00000004 ucHeap
+
+UNDEFINED SYMBOLS
+vTaskSuspendAll
+xTaskResumeAll
+__do_clear_bss

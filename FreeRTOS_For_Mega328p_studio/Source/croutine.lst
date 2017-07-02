@@ -1,0 +1,611 @@
+   1               		.file	"croutine.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	xCoRoutineRemoveFromEventList
+  18               	xCoRoutineRemoveFromEventList:
+  19               	.LFB8:
+  20               	.LM1:
+  21               	.LVL0:
+  22 0000 EF92      		push r14
+  23 0002 FF92      		push r15
+  24 0004 0F93      		push r16
+  25 0006 1F93      		push r17
+  26               	/* prologue: function */
+  27               	/* frame size = 0 */
+  28               	.LM2:
+  29 0008 DC01      		movw r26,r24
+  30 000a 1596      		adiw r26,5
+  31 000c ED91      		ld r30,X+
+  32 000e FC91      		ld r31,X
+  33 0010 1697      		sbiw r26,5+1
+  34 0012 E680      		ldd r14,Z+6
+  35 0014 F780      		ldd r15,Z+7
+  36               	.LVL1:
+  37               	.LM3:
+  38 0016 8701      		movw r16,r14
+  39 0018 045F      		subi r16,lo8(-(12))
+  40 001a 1F4F      		sbci r17,hi8(-(12))
+  41 001c C801      		movw r24,r16
+  42               	.LVL2:
+  43 001e 0E94 0000 		call uxListRemove
+  44               	.LM4:
+  45 0022 80E0      		ldi r24,lo8(xPendingReadyCoRoutineList)
+  46 0024 90E0      		ldi r25,hi8(xPendingReadyCoRoutineList)
+  47 0026 B801      		movw r22,r16
+  48 0028 0E94 0000 		call vListInsertEnd
+  49 002c 20E0      		ldi r18,lo8(0)
+  50 002e E091 0000 		lds r30,pxCurrentCoRoutine
+  51 0032 F091 0000 		lds r31,(pxCurrentCoRoutine)+1
+  52 0036 D701      		movw r26,r14
+  53 0038 5696      		adiw r26,22
+  54 003a 9C91      		ld r25,X
+  55 003c 8689      		ldd r24,Z+22
+  56 003e 9817      		cp r25,r24
+  57 0040 00F0      		brlo .L2
+  58 0042 21E0      		ldi r18,lo8(1)
+  59               	.L2:
+  60               	.LM5:
+  61 0044 822F      		mov r24,r18
+  62               	/* epilogue start */
+  63 0046 1F91      		pop r17
+  64 0048 0F91      		pop r16
+  65 004a FF90      		pop r15
+  66 004c EF90      		pop r14
+  67               	.LVL3:
+  68 004e 0895      		ret
+  69               	.LFE8:
+  71               	.global	vCoRoutineSchedule
+  73               	vCoRoutineSchedule:
+  74               	.LFB6:
+  75               	.LM6:
+  76 0050 FF92      		push r15
+  77 0052 0F93      		push r16
+  78 0054 1F93      		push r17
+  79 0056 CF93      		push r28
+  80 0058 DF93      		push r29
+  81               	/* prologue: function */
+  82               	/* frame size = 0 */
+  83               	.LBB11:
+  84               	.LBB12:
+  85               	.LBB13:
+  86               	.LM7:
+  87 005a 99E0      		ldi r25,lo8(9)
+  88 005c F92E      		mov r15,r25
+  89 005e 00C0      		rjmp .L5
+  90               	.LVL4:
+  91               	.L7:
+  92               	.LM8:
+  93               	/* #APP */
+  94               	 ;  249 "../../Source/croutine.c" 1
+  95 0060 F894      		cli
+  96               	 ;  0 "" 2
+  97               	.LM9:
+  98               	/* #NOAPP */
+  99 0062 E091 0000 		lds r30,xPendingReadyCoRoutineList+5
+ 100 0066 F091 0000 		lds r31,(xPendingReadyCoRoutineList+5)+1
+ 101 006a 0681      		ldd r16,Z+6
+ 102 006c 1781      		ldd r17,Z+7
+ 103               	.LM10:
+ 104 006e C801      		movw r24,r16
+ 105 0070 0C96      		adiw r24,12
+ 106 0072 0E94 0000 		call uxListRemove
+ 107               	.LM11:
+ 108               	/* #APP */
+ 109               	 ;  254 "../../Source/croutine.c" 1
+ 110 0076 7894      		sei
+ 111               	 ;  0 "" 2
+ 112               	.LM12:
+ 113               	/* #NOAPP */
+ 114 0078 E801      		movw r28,r16
+ 115 007a 2296      		adiw r28,2
+ 116 007c CE01      		movw r24,r28
+ 117 007e 0E94 0000 		call uxListRemove
+ 118               	.LM13:
+ 119 0082 F801      		movw r30,r16
+ 120 0084 9689      		ldd r25,Z+22
+ 121 0086 8091 0000 		lds r24,uxTopCoRoutineReadyPriority
+ 122 008a 8917      		cp r24,r25
+ 123 008c 00F4      		brsh .L6
+ 124 008e 9093 0000 		sts uxTopCoRoutineReadyPriority,r25
+ 125               	.L6:
+ 126 0092 9F9D      		mul r25,r15
+ 127 0094 C001      		movw r24,r0
+ 128 0096 1124      		clr r1
+ 129 0098 8050      		subi r24,lo8(-(pxReadyCoRoutineLists))
+ 130 009a 9040      		sbci r25,hi8(-(pxReadyCoRoutineLists))
+ 131 009c BE01      		movw r22,r28
+ 132 009e 0E94 0000 		call vListInsertEnd
+ 133               	.L5:
+ 134               	.LBE13:
+ 135               	.LM14:
+ 136 00a2 8091 0000 		lds r24,xPendingReadyCoRoutineList
+ 137 00a6 8823      		tst r24
+ 138 00a8 01F4      		brne .L7
+ 139               	.LBE12:
+ 140               	.LBE11:
+ 141               	.LBB14:
+ 142               	.LM15:
+ 143 00aa 0E94 0000 		call xTaskGetTickCount
+ 144               	.LBB15:
+ 145 00ae 2091 0000 		lds r18,xLastTickCount
+ 146 00b2 3091 0000 		lds r19,(xLastTickCount)+1
+ 147 00b6 821B      		sub r24,r18
+ 148 00b8 930B      		sbc r25,r19
+ 149 00ba 9093 0000 		sts (xPassedTicks)+1,r25
+ 150 00be 8093 0000 		sts xPassedTicks,r24
+ 151               	.LM16:
+ 152 00c2 89E0      		ldi r24,lo8(9)
+ 153 00c4 F82E      		mov r15,r24
+ 154 00c6 00C0      		rjmp .L23
+ 155               	.LVL5:
+ 156               	.L13:
+ 157               	.LM17:
+ 158 00c8 0196      		adiw r24,1
+ 159 00ca 9093 0000 		sts (xCoRoutineTickCount)+1,r25
+ 160 00ce 8093 0000 		sts xCoRoutineTickCount,r24
+ 161               	.LM18:
+ 162 00d2 2150      		subi r18,lo8(-(-1))
+ 163 00d4 3040      		sbci r19,hi8(-(-1))
+ 164 00d6 3093 0000 		sts (xPassedTicks)+1,r19
+ 165 00da 2093 0000 		sts xPassedTicks,r18
+ 166               	.LM19:
+ 167 00de 892B      		or r24,r25
+ 168 00e0 01F0      		breq .+2
+ 169 00e2 00C0      		rjmp .L22
+ 170               	.LBB16:
+ 171               	.LM20:
+ 172 00e4 2091 0000 		lds r18,pxDelayedCoRoutineList
+ 173 00e8 3091 0000 		lds r19,(pxDelayedCoRoutineList)+1
+ 174               	.LVL6:
+ 175               	.LM21:
+ 176 00ec 8091 0000 		lds r24,pxOverflowDelayedCoRoutineList
+ 177 00f0 9091 0000 		lds r25,(pxOverflowDelayedCoRoutineList)+1
+ 178 00f4 9093 0000 		sts (pxDelayedCoRoutineList)+1,r25
+ 179 00f8 8093 0000 		sts pxDelayedCoRoutineList,r24
+ 180               	.LM22:
+ 181 00fc 3093 0000 		sts (pxOverflowDelayedCoRoutineList)+1,r19
+ 182 0100 2093 0000 		sts pxOverflowDelayedCoRoutineList,r18
+ 183 0104 00C0      		rjmp .L22
+ 184               	.L12:
+ 185               	.LBE16:
+ 186               	.LM23:
+ 187 0106 0580      		ldd __tmp_reg__,Z+5
+ 188 0108 F681      		ldd r31,Z+6
+ 189 010a E02D      		mov r30,__tmp_reg__
+ 190 010c C681      		ldd r28,Z+6
+ 191 010e D781      		ldd r29,Z+7
+ 192               	.LM24:
+ 193 0110 2091 0000 		lds r18,xCoRoutineTickCount
+ 194 0114 3091 0000 		lds r19,(xCoRoutineTickCount)+1
+ 195               	.LVL7:
+ 196 0118 8A81      		ldd r24,Y+2
+ 197 011a 9B81      		ldd r25,Y+3
+ 198 011c 2817      		cp r18,r24
+ 199 011e 3907      		cpc r19,r25
+ 200 0120 00F0      		brlo .L23
+ 201               	.LM25:
+ 202               	/* #APP */
+ 203               	 ;  295 "../../Source/croutine.c" 1
+ 204 0122 F894      		cli
+ 205               	 ;  0 "" 2
+ 206               	.LM26:
+ 207               	/* #NOAPP */
+ 208 0124 8E01      		movw r16,r28
+ 209               	.LVL8:
+ 210 0126 0E5F      		subi r16,lo8(-(2))
+ 211 0128 1F4F      		sbci r17,hi8(-(2))
+ 212 012a C801      		movw r24,r16
+ 213 012c 0E94 0000 		call uxListRemove
+ 214               	.LM27:
+ 215 0130 8C89      		ldd r24,Y+20
+ 216 0132 9D89      		ldd r25,Y+21
+ 217 0134 892B      		or r24,r25
+ 218 0136 01F0      		breq .L10
+ 219               	.LM28:
+ 220 0138 CE01      		movw r24,r28
+ 221 013a 0C96      		adiw r24,12
+ 222 013c 0E94 0000 		call uxListRemove
+ 223               	.L10:
+ 224               	.LM29:
+ 225               	/* #APP */
+ 226               	 ;  310 "../../Source/croutine.c" 1
+ 227 0140 7894      		sei
+ 228               	 ;  0 "" 2
+ 229               	.LM30:
+ 230               	/* #NOAPP */
+ 231 0142 9E89      		ldd r25,Y+22
+ 232 0144 8091 0000 		lds r24,uxTopCoRoutineReadyPriority
+ 233 0148 8917      		cp r24,r25
+ 234 014a 00F4      		brsh .L11
+ 235 014c 9093 0000 		sts uxTopCoRoutineReadyPriority,r25
+ 236               	.L11:
+ 237 0150 9F9D      		mul r25,r15
+ 238 0152 C001      		movw r24,r0
+ 239 0154 1124      		clr r1
+ 240 0156 8050      		subi r24,lo8(-(pxReadyCoRoutineLists))
+ 241 0158 9040      		sbci r25,hi8(-(pxReadyCoRoutineLists))
+ 242 015a B801      		movw r22,r16
+ 243 015c 0E94 0000 		call vListInsertEnd
+ 244               	.LVL9:
+ 245               	.L22:
+ 246               	.LM31:
+ 247 0160 E091 0000 		lds r30,pxDelayedCoRoutineList
+ 248 0164 F091 0000 		lds r31,(pxDelayedCoRoutineList)+1
+ 249 0168 8081      		ld r24,Z
+ 250 016a 8823      		tst r24
+ 251 016c 01F4      		brne .L12
+ 252               	.L23:
+ 253               	.LM32:
+ 254 016e 2091 0000 		lds r18,xPassedTicks
+ 255 0172 3091 0000 		lds r19,(xPassedTicks)+1
+ 256               	.LVL10:
+ 257 0176 8091 0000 		lds r24,xCoRoutineTickCount
+ 258 017a 9091 0000 		lds r25,(xCoRoutineTickCount)+1
+ 259 017e 2115      		cp r18,__zero_reg__
+ 260 0180 3105      		cpc r19,__zero_reg__
+ 261 0182 01F0      		breq .+2
+ 262 0184 00C0      		rjmp .L13
+ 263               	.LM33:
+ 264 0186 9093 0000 		sts (xLastTickCount)+1,r25
+ 265 018a 8093 0000 		sts xLastTickCount,r24
+ 266 018e 9091 0000 		lds r25,uxTopCoRoutineReadyPriority
+ 267               	.LBE15:
+ 268               	.LBE14:
+ 269               	.LM34:
+ 270 0192 29E0      		ldi r18,lo8(9)
+ 271 0194 00C0      		rjmp .L14
+ 272               	.L17:
+ 273               	.LM35:
+ 274 0196 9923      		tst r25
+ 275 0198 01F4      		brne .L15
+ 276 019a 1092 0000 		sts uxTopCoRoutineReadyPriority,__zero_reg__
+ 277 019e 00C0      		rjmp .L19
+ 278               	.L15:
+ 279 01a0 9150      		subi r25,lo8(-(-1))
+ 280               	.L14:
+ 281               	.LM36:
+ 282 01a2 929F      		mul r25,r18
+ 283 01a4 D001      		movw r26,r0
+ 284 01a6 1124      		clr r1
+ 285 01a8 A050      		subi r26,lo8(-(pxReadyCoRoutineLists))
+ 286 01aa B040      		sbci r27,hi8(-(pxReadyCoRoutineLists))
+ 287 01ac 8C91      		ld r24,X
+ 288 01ae 8823      		tst r24
+ 289 01b0 01F0      		breq .L17
+ 290 01b2 9093 0000 		sts uxTopCoRoutineReadyPriority,r25
+ 291               	.LBB17:
+ 292               	.LM37:
+ 293 01b6 1196      		adiw r26,1
+ 294 01b8 ED91      		ld r30,X+
+ 295 01ba FC91      		ld r31,X
+ 296 01bc 1297      		sbiw r26,1+1
+ 297 01be 0280      		ldd __tmp_reg__,Z+2
+ 298 01c0 F381      		ldd r31,Z+3
+ 299 01c2 E02D      		mov r30,__tmp_reg__
+ 300 01c4 1296      		adiw r26,1+1
+ 301 01c6 FC93      		st X,r31
+ 302 01c8 EE93      		st -X,r30
+ 303 01ca 1197      		sbiw r26,1
+ 304 01cc CD01      		movw r24,r26
+ 305 01ce 0396      		adiw r24,3
+ 306 01d0 E817      		cp r30,r24
+ 307 01d2 F907      		cpc r31,r25
+ 308 01d4 01F4      		brne .L18
+ 309 01d6 8281      		ldd r24,Z+2
+ 310 01d8 9381      		ldd r25,Z+3
+ 311 01da 1296      		adiw r26,1+1
+ 312 01dc 9C93      		st X,r25
+ 313 01de 8E93      		st -X,r24
+ 314 01e0 1197      		sbiw r26,1
+ 315               	.L18:
+ 316 01e2 1196      		adiw r26,1
+ 317 01e4 ED91      		ld r30,X+
+ 318 01e6 FC91      		ld r31,X
+ 319 01e8 1297      		sbiw r26,1+1
+ 320 01ea 0680      		ldd __tmp_reg__,Z+6
+ 321 01ec F781      		ldd r31,Z+7
+ 322 01ee E02D      		mov r30,__tmp_reg__
+ 323 01f0 F093 0000 		sts (pxCurrentCoRoutine)+1,r31
+ 324 01f4 E093 0000 		sts pxCurrentCoRoutine,r30
+ 325               	.LBE17:
+ 326               	.LM38:
+ 327 01f8 2081      		ld r18,Z
+ 328 01fa 3181      		ldd r19,Z+1
+ 329 01fc CF01      		movw r24,r30
+ 330 01fe 6789      		ldd r22,Z+23
+ 331 0200 F901      		movw r30,r18
+ 332 0202 0995      		icall
+ 333               	.L19:
+ 334               	/* epilogue start */
+ 335               	.LM39:
+ 336 0204 DF91      		pop r29
+ 337 0206 CF91      		pop r28
+ 338               	.LVL11:
+ 339 0208 1F91      		pop r17
+ 340 020a 0F91      		pop r16
+ 341               	.LVL12:
+ 342 020c FF90      		pop r15
+ 343 020e 0895      		ret
+ 344               	.LFE6:
+ 346               	.global	vCoRoutineAddToDelayedList
+ 348               	vCoRoutineAddToDelayedList:
+ 349               	.LFB3:
+ 350               	.LM40:
+ 351               	.LVL13:
+ 352 0210 0F93      		push r16
+ 353 0212 1F93      		push r17
+ 354 0214 CF93      		push r28
+ 355 0216 DF93      		push r29
+ 356               	/* prologue: function */
+ 357               	/* frame size = 0 */
+ 358 0218 EB01      		movw r28,r22
+ 359               	.LM41:
+ 360 021a 0091 0000 		lds r16,xCoRoutineTickCount
+ 361 021e 1091 0000 		lds r17,(xCoRoutineTickCount)+1
+ 362               	.LVL14:
+ 363 0222 080F      		add r16,r24
+ 364 0224 191F      		adc r17,r25
+ 365               	.LM42:
+ 366 0226 8091 0000 		lds r24,pxCurrentCoRoutine
+ 367 022a 9091 0000 		lds r25,(pxCurrentCoRoutine)+1
+ 368               	.LVL15:
+ 369 022e 0296      		adiw r24,2
+ 370 0230 0E94 0000 		call uxListRemove
+ 371               	.LVL16:
+ 372               	.LM43:
+ 373 0234 E091 0000 		lds r30,pxCurrentCoRoutine
+ 374 0238 F091 0000 		lds r31,(pxCurrentCoRoutine)+1
+ 375 023c 1383      		std Z+3,r17
+ 376 023e 0283      		std Z+2,r16
+ 377               	.LM44:
+ 378 0240 8091 0000 		lds r24,xCoRoutineTickCount
+ 379 0244 9091 0000 		lds r25,(xCoRoutineTickCount)+1
+ 380 0248 BF01      		movw r22,r30
+ 381 024a 6E5F      		subi r22,lo8(-(2))
+ 382 024c 7F4F      		sbci r23,hi8(-(2))
+ 383 024e 0817      		cp r16,r24
+ 384 0250 1907      		cpc r17,r25
+ 385 0252 00F4      		brsh .L25
+ 386               	.LM45:
+ 387 0254 8091 0000 		lds r24,pxOverflowDelayedCoRoutineList
+ 388 0258 9091 0000 		lds r25,(pxOverflowDelayedCoRoutineList)+1
+ 389 025c 00C0      		rjmp .L29
+ 390               	.L25:
+ 391               	.LM46:
+ 392 025e 8091 0000 		lds r24,pxDelayedCoRoutineList
+ 393 0262 9091 0000 		lds r25,(pxDelayedCoRoutineList)+1
+ 394               	.L29:
+ 395 0266 0E94 0000 		call vListInsert
+ 396               	.LM47:
+ 397 026a 2097      		sbiw r28,0
+ 398 026c 01F0      		breq .L28
+ 399               	.LM48:
+ 400 026e 6091 0000 		lds r22,pxCurrentCoRoutine
+ 401 0272 7091 0000 		lds r23,(pxCurrentCoRoutine)+1
+ 402 0276 645F      		subi r22,lo8(-(12))
+ 403 0278 7F4F      		sbci r23,hi8(-(12))
+ 404 027a CE01      		movw r24,r28
+ 405 027c 0E94 0000 		call vListInsert
+ 406               	.L28:
+ 407               	/* epilogue start */
+ 408               	.LM49:
+ 409 0280 DF91      		pop r29
+ 410 0282 CF91      		pop r28
+ 411               	.LVL17:
+ 412 0284 1F91      		pop r17
+ 413 0286 0F91      		pop r16
+ 414               	.LVL18:
+ 415 0288 0895      		ret
+ 416               	.LFE3:
+ 418               	.global	xCoRoutineCreate
+ 420               	xCoRoutineCreate:
+ 421               	.LFB2:
+ 422               	.LM50:
+ 423               	.LVL19:
+ 424 028a AF92      		push r10
+ 425 028c BF92      		push r11
+ 426 028e CF92      		push r12
+ 427 0290 DF92      		push r13
+ 428 0292 EF92      		push r14
+ 429 0294 FF92      		push r15
+ 430 0296 0F93      		push r16
+ 431 0298 1F93      		push r17
+ 432 029a CF93      		push r28
+ 433 029c DF93      		push r29
+ 434               	/* prologue: function */
+ 435               	/* frame size = 0 */
+ 436 029e 6C01      		movw r12,r24
+ 437 02a0 B62E      		mov r11,r22
+ 438 02a2 A42E      		mov r10,r20
+ 439               	.LM51:
+ 440 02a4 8AE1      		ldi r24,lo8(26)
+ 441 02a6 90E0      		ldi r25,hi8(26)
+ 442               	.LVL20:
+ 443 02a8 0E94 0000 		call pvPortMalloc
+ 444               	.LVL21:
+ 445 02ac EC01      		movw r28,r24
+ 446               	.LM52:
+ 447 02ae 0097      		sbiw r24,0
+ 448               	.LVL22:
+ 449 02b0 01F4      		brne .L31
+ 450 02b2 8FEF      		ldi r24,lo8(-1)
+ 451               	.LVL23:
+ 452 02b4 00C0      		rjmp .L32
+ 453               	.LVL24:
+ 454               	.L31:
+ 455               	.LM53:
+ 456 02b6 8091 0000 		lds r24,pxCurrentCoRoutine
+ 457 02ba 9091 0000 		lds r25,(pxCurrentCoRoutine)+1
+ 458               	.LVL25:
+ 459 02be 892B      		or r24,r25
+ 460 02c0 01F4      		brne .L33
+ 461               	.LM54:
+ 462 02c2 D093 0000 		sts (pxCurrentCoRoutine)+1,r29
+ 463 02c6 C093 0000 		sts pxCurrentCoRoutine,r28
+ 464               	.LVL26:
+ 465               	.LBB18:
+ 466               	.LBB19:
+ 467               	.LM55:
+ 468 02ca 80E0      		ldi r24,lo8(pxReadyCoRoutineLists)
+ 469 02cc 90E0      		ldi r25,hi8(pxReadyCoRoutineLists)
+ 470 02ce 0E94 0000 		call vListInitialise
+ 471 02d2 80E0      		ldi r24,lo8(pxReadyCoRoutineLists+9)
+ 472 02d4 90E0      		ldi r25,hi8(pxReadyCoRoutineLists+9)
+ 473 02d6 0E94 0000 		call vListInitialise
+ 474               	.LM56:
+ 475 02da 20E0      		ldi r18,lo8(xDelayedCoRoutineList1)
+ 476 02dc E22E      		mov r14,r18
+ 477 02de 20E0      		ldi r18,hi8(xDelayedCoRoutineList1)
+ 478 02e0 F22E      		mov r15,r18
+ 479 02e2 C701      		movw r24,r14
+ 480 02e4 0E94 0000 		call vListInitialise
+ 481               	.LM57:
+ 482 02e8 00E0      		ldi r16,lo8(xDelayedCoRoutineList2)
+ 483 02ea 10E0      		ldi r17,hi8(xDelayedCoRoutineList2)
+ 484 02ec C801      		movw r24,r16
+ 485 02ee 0E94 0000 		call vListInitialise
+ 486               	.LM58:
+ 487 02f2 80E0      		ldi r24,lo8(xPendingReadyCoRoutineList)
+ 488 02f4 90E0      		ldi r25,hi8(xPendingReadyCoRoutineList)
+ 489 02f6 0E94 0000 		call vListInitialise
+ 490               	.LM59:
+ 491 02fa F092 0000 		sts (pxDelayedCoRoutineList)+1,r15
+ 492 02fe E092 0000 		sts pxDelayedCoRoutineList,r14
+ 493               	.LM60:
+ 494 0302 1093 0000 		sts (pxOverflowDelayedCoRoutineList)+1,r17
+ 495 0306 0093 0000 		sts pxOverflowDelayedCoRoutineList,r16
+ 496               	.L33:
+ 497 030a EB2C      		mov r14,r11
+ 498 030c BB20      		tst r11
+ 499 030e 01F0      		breq .L34
+ 500 0310 EE24      		clr r14
+ 501 0312 E394      		inc r14
+ 502               	.LVL27:
+ 503               	.L34:
+ 504               	.LBE19:
+ 505               	.LBE18:
+ 506               	.LM61:
+ 507 0314 198E      		std Y+25,__zero_reg__
+ 508 0316 188E      		std Y+24,__zero_reg__
+ 509               	.LM62:
+ 510 0318 EE8A      		std Y+22,r14
+ 511               	.LM63:
+ 512 031a AF8A      		std Y+23,r10
+ 513               	.LM64:
+ 514 031c FE01      		movw r30,r28
+ 515               	.LVL28:
+ 516 031e C192      		st Z+,r12
+ 517 0320 D192      		st Z+,r13
+ 518 0322 8F01      		movw r16,r30
+ 519               	.LM65:
+ 520 0324 CF01      		movw r24,r30
+ 521 0326 0E94 0000 		call vListInitialiseItem
+ 522               	.LM66:
+ 523 032a CE01      		movw r24,r28
+ 524               	.LVL29:
+ 525 032c 0C96      		adiw r24,12
+ 526 032e 0E94 0000 		call vListInitialiseItem
+ 527               	.LM67:
+ 528 0332 D987      		std Y+9,r29
+ 529 0334 C887      		std Y+8,r28
+ 530               	.LM68:
+ 531 0336 DB8B      		std Y+19,r29
+ 532 0338 CA8B      		std Y+18,r28
+ 533               	.LM69:
+ 534 033a 82E0      		ldi r24,lo8(2)
+ 535 033c 90E0      		ldi r25,hi8(2)
+ 536 033e 8E19      		sub r24,r14
+ 537 0340 9109      		sbc r25,__zero_reg__
+ 538 0342 9D87      		std Y+13,r25
+ 539 0344 8C87      		std Y+12,r24
+ 540               	.LM70:
+ 541 0346 9E89      		ldd r25,Y+22
+ 542 0348 8091 0000 		lds r24,uxTopCoRoutineReadyPriority
+ 543 034c 8917      		cp r24,r25
+ 544 034e 00F4      		brsh .L35
+ 545 0350 9093 0000 		sts uxTopCoRoutineReadyPriority,r25
+ 546               	.L35:
+ 547 0354 89E0      		ldi r24,lo8(9)
+ 548 0356 989F      		mul r25,r24
+ 549 0358 C001      		movw r24,r0
+ 550 035a 1124      		clr r1
+ 551 035c 8050      		subi r24,lo8(-(pxReadyCoRoutineLists))
+ 552 035e 9040      		sbci r25,hi8(-(pxReadyCoRoutineLists))
+ 553 0360 B801      		movw r22,r16
+ 554 0362 0E94 0000 		call vListInsertEnd
+ 555 0366 81E0      		ldi r24,lo8(1)
+ 556               	.LVL30:
+ 557               	.L32:
+ 558               	.LVL31:
+ 559               	/* epilogue start */
+ 560               	.LM71:
+ 561 0368 DF91      		pop r29
+ 562 036a CF91      		pop r28
+ 563               	.LVL32:
+ 564 036c 1F91      		pop r17
+ 565 036e 0F91      		pop r16
+ 566 0370 FF90      		pop r15
+ 567 0372 EF90      		pop r14
+ 568 0374 DF90      		pop r13
+ 569 0376 CF90      		pop r12
+ 570               	.LVL33:
+ 571 0378 BF90      		pop r11
+ 572               	.LVL34:
+ 573 037a AF90      		pop r10
+ 574               	.LVL35:
+ 575 037c 0895      		ret
+ 576               	.LFE2:
+ 578               	.global	pxCurrentCoRoutine
+ 579               	.global	pxCurrentCoRoutine
+ 580               		.section .bss
+ 583               	pxCurrentCoRoutine:
+ 584 0000 0000      		.skip 2,0
+ 585               		.lcomm uxTopCoRoutineReadyPriority,1
+ 586               		.lcomm xLastTickCount,2
+ 587               		.lcomm xPassedTicks,2
+ 588               		.lcomm xCoRoutineTickCount,2
+ 589               		.lcomm pxReadyCoRoutineLists,18
+ 590               		.lcomm xDelayedCoRoutineList1,9
+ 591               		.lcomm xDelayedCoRoutineList2,9
+ 592               		.lcomm pxDelayedCoRoutineList,2
+ 593               		.lcomm pxOverflowDelayedCoRoutineList,2
+ 594               		.lcomm xPendingReadyCoRoutineList,9
+ 643               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 croutine.c
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:2      *ABS*:0000003f __SREG__
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:5      *ABS*:00000034 __CCP__
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:18     .text:00000000 xCoRoutineRemoveFromEventList
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:593    .bss:00000031 xPendingReadyCoRoutineList
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:583    .bss:00000000 pxCurrentCoRoutine
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:73     .text:00000050 vCoRoutineSchedule
+                             .bss:00000002 uxTopCoRoutineReadyPriority
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:588    .bss:00000009 pxReadyCoRoutineLists
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:585    .bss:00000003 xLastTickCount
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:586    .bss:00000005 xPassedTicks
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:587    .bss:00000007 xCoRoutineTickCount
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:591    .bss:0000002d pxDelayedCoRoutineList
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:592    .bss:0000002f pxOverflowDelayedCoRoutineList
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:348    .text:00000210 vCoRoutineAddToDelayedList
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:420    .text:0000028a xCoRoutineCreate
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:589    .bss:0000001b xDelayedCoRoutineList1
+C:\Users\Tintu\AppData\Local\Temp/ccRDuu9B.s:590    .bss:00000024 xDelayedCoRoutineList2
+
+UNDEFINED SYMBOLS
+uxListRemove
+vListInsertEnd
+xTaskGetTickCount
+vListInsert
+pvPortMalloc
+vListInitialise
+vListInitialiseItem
+__do_clear_bss

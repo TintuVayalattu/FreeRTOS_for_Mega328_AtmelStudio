@@ -1,0 +1,329 @@
+   1               		.file	"PollQ.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	xArePollingQueuesStillRunning
+  18               	xArePollingQueuesStillRunning:
+  19               	.LFB5:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 8091 0000 		lds r24,xPollingConsumerCount
+  25 0004 8823      		tst r24
+  26 0006 01F0      		breq .L3
+  27 0008 8091 0000 		lds r24,xPollingProducerCount
+  28 000c 8111      		cpse r24,__zero_reg__
+  29 000e 81E0      		ldi r24,lo8(1)
+  30               	.L3:
+  31               	.LM3:
+  32 0010 1092 0000 		sts xPollingConsumerCount,__zero_reg__
+  33               	.LM4:
+  34 0014 1092 0000 		sts xPollingProducerCount,__zero_reg__
+  35               	/* epilogue start */
+  36               	.LM5:
+  37 0018 0895      		ret
+  38               	.LFE5:
+  40               		.data
+  41               	.LC0:
+  42 0000 5143 6F6E 		.string	"QConsNB"
+  42      734E 4200 
+  43               	.LC1:
+  44 0008 5150 726F 		.string	"QProdNB"
+  44      644E 4200 
+  45               		.text
+  46               	.global	vStartPolledQueueTasks
+  48               	vStartPolledQueueTasks:
+  49               	.LFB2:
+  50               	.LM6:
+  51               	.LVL0:
+  52 001a EF92      		push r14
+  53 001c FF92      		push r15
+  54 001e 0F93      		push r16
+  55 0020 1F93      		push r17
+  56               	/* prologue: function */
+  57               	/* frame size = 0 */
+  58 0022 182F      		mov r17,r24
+  59               	.LM7:
+  60 0024 8AE0      		ldi r24,lo8(10)
+  61               	.LVL1:
+  62 0026 62E0      		ldi r22,lo8(2)
+  63 0028 40E0      		ldi r20,lo8(0)
+  64 002a 0E94 0000 		call xQueueGenericCreate
+  65 002e 9093 0000 		sts (xPolledQueue.1742)+1,r25
+  66 0032 8093 0000 		sts xPolledQueue.1742,r24
+  67               	.LM8:
+  68 0036 892B      		or r24,r25
+  69 0038 01F0      		breq .L8
+  70               	.LM9:
+  71 003a 80E0      		ldi r24,lo8(gs(vPolledQueueConsumer))
+  72 003c 90E0      		ldi r25,hi8(gs(vPolledQueueConsumer))
+  73 003e 60E0      		ldi r22,lo8(.LC0)
+  74 0040 70E0      		ldi r23,hi8(.LC0)
+  75 0042 45E5      		ldi r20,lo8(85)
+  76 0044 50E0      		ldi r21,hi8(85)
+  77 0046 20E0      		ldi r18,lo8(xPolledQueue.1742)
+  78 0048 30E0      		ldi r19,hi8(xPolledQueue.1742)
+  79 004a 012F      		mov r16,r17
+  80 004c EE24      		clr r14
+  81 004e FF24      		clr r15
+  82 0050 0E94 0000 		call xTaskCreate
+  83               	.LM10:
+  84 0054 80E0      		ldi r24,lo8(gs(vPolledQueueProducer))
+  85 0056 90E0      		ldi r25,hi8(gs(vPolledQueueProducer))
+  86 0058 60E0      		ldi r22,lo8(.LC1)
+  87 005a 70E0      		ldi r23,hi8(.LC1)
+  88 005c 45E5      		ldi r20,lo8(85)
+  89 005e 50E0      		ldi r21,hi8(85)
+  90 0060 20E0      		ldi r18,lo8(xPolledQueue.1742)
+  91 0062 30E0      		ldi r19,hi8(xPolledQueue.1742)
+  92 0064 0E94 0000 		call xTaskCreate
+  93               	.L8:
+  94               	/* epilogue start */
+  95               	.LM11:
+  96 0068 1F91      		pop r17
+  97               	.LVL2:
+  98 006a 0F91      		pop r16
+  99 006c FF90      		pop r15
+ 100 006e EF90      		pop r14
+ 101 0070 0895      		ret
+ 102               	.LFE2:
+ 105               	vPolledQueueProducer:
+ 106               	.LFB3:
+ 107               	.LM12:
+ 108               	.LVL3:
+ 109 0072 CF92      		push r12
+ 110 0074 DF92      		push r13
+ 111 0076 EF92      		push r14
+ 112 0078 FF92      		push r15
+ 113 007a 0F93      		push r16
+ 114 007c 1F93      		push r17
+ 115 007e DF93      		push r29
+ 116 0080 CF93      		push r28
+ 117 0082 00D0      		rcall .
+ 118 0084 CDB7      		in r28,__SP_L__
+ 119 0086 DEB7      		in r29,__SP_H__
+ 120               	/* prologue: function */
+ 121               	/* frame size = 2 */
+ 122 0088 7C01      		movw r14,r24
+ 123               	.LM13:
+ 124 008a 1A82      		std Y+2,__zero_reg__
+ 125 008c 1982      		std Y+1,__zero_reg__
+ 126               	.LVL4:
+ 127 008e 00E0      		ldi r16,lo8(0)
+ 128               	.LVL5:
+ 129 0090 10E0      		ldi r17,lo8(0)
+ 130               	.LVL6:
+ 131               	.LM14:
+ 132 0092 6E01      		movw r12,r28
+ 133 0094 0894      		sec
+ 134 0096 C11C      		adc r12,__zero_reg__
+ 135 0098 D11C      		adc r13,__zero_reg__
+ 136 009a 00C0      		rjmp .L16
+ 137               	.LVL7:
+ 138               	.L14:
+ 139 009c F701      		movw r30,r14
+ 140 009e 8081      		ld r24,Z
+ 141 00a0 9181      		ldd r25,Z+1
+ 142 00a2 B601      		movw r22,r12
+ 143 00a4 40E0      		ldi r20,lo8(0)
+ 144 00a6 50E0      		ldi r21,hi8(0)
+ 145 00a8 20E0      		ldi r18,lo8(0)
+ 146 00aa 0E94 0000 		call xQueueGenericSend
+ 147 00ae 8130      		cpi r24,lo8(1)
+ 148 00b0 01F0      		breq .L11
+ 149 00b2 01E0      		ldi r16,lo8(1)
+ 150 00b4 00C0      		rjmp .L12
+ 151               	.L11:
+ 152               	.LM15:
+ 153 00b6 0023      		tst r16
+ 154 00b8 01F4      		brne .L13
+ 155               	.LM16:
+ 156               	/* #APP */
+ 157               	 ;  176 "../Common/Minimal/PollQ.c" 1
+ 158 00ba 0FB6      		in		__tmp_reg__, __SREG__
+ 159               	 ;  0 "" 2
+ 160               	 ;  176 "../Common/Minimal/PollQ.c" 1
+ 161 00bc F894      		cli
+ 162               	 ;  0 "" 2
+ 163               	 ;  176 "../Common/Minimal/PollQ.c" 1
+ 164 00be 0F92      		push	__tmp_reg__
+ 165               	 ;  0 "" 2
+ 166               	.LM17:
+ 167               	/* #NOAPP */
+ 168 00c0 8091 0000 		lds r24,xPollingProducerCount
+ 169 00c4 8F5F      		subi r24,lo8(-(1))
+ 170 00c6 8093 0000 		sts xPollingProducerCount,r24
+ 171               	.LM18:
+ 172               	/* #APP */
+ 173               	 ;  178 "../Common/Minimal/PollQ.c" 1
+ 174 00ca 0F90      		pop		__tmp_reg__
+ 175               	 ;  0 "" 2
+ 176               	 ;  178 "../Common/Minimal/PollQ.c" 1
+ 177 00cc 0FBE      		out		__SREG__, __tmp_reg__
+ 178               	 ;  0 "" 2
+ 179               	/* #NOAPP */
+ 180               	.L13:
+ 181               	.LM19:
+ 182 00ce 8981      		ldd r24,Y+1
+ 183 00d0 9A81      		ldd r25,Y+2
+ 184 00d2 0196      		adiw r24,1
+ 185               	.LVL8:
+ 186 00d4 9A83      		std Y+2,r25
+ 187 00d6 8983      		std Y+1,r24
+ 188               	.LVL9:
+ 189               	.L12:
+ 190               	.LM20:
+ 191 00d8 1F5F      		subi r17,lo8(-(1))
+ 192               	.LVL10:
+ 193               	.L16:
+ 194 00da 1330      		cpi r17,lo8(3)
+ 195 00dc 04F0      		brlt .L14
+ 196               	.LM21:
+ 197 00de 83E0      		ldi r24,lo8(3)
+ 198 00e0 90E0      		ldi r25,hi8(3)
+ 199 00e2 0E94 0000 		call vTaskDelay
+ 200 00e6 10E0      		ldi r17,lo8(0)
+ 201 00e8 00C0      		rjmp .L14
+ 202               	.LFE3:
+ 205               	vPolledQueueConsumer:
+ 206               	.LFB4:
+ 207               	.LM22:
+ 208               	.LVL11:
+ 209 00ea 9F92      		push r9
+ 210 00ec AF92      		push r10
+ 211 00ee BF92      		push r11
+ 212 00f0 CF92      		push r12
+ 213 00f2 DF92      		push r13
+ 214 00f4 EF92      		push r14
+ 215 00f6 FF92      		push r15
+ 216 00f8 0F93      		push r16
+ 217 00fa 1F93      		push r17
+ 218 00fc DF93      		push r29
+ 219 00fe CF93      		push r28
+ 220 0100 00D0      		rcall .
+ 221 0102 CDB7      		in r28,__SP_L__
+ 222 0104 DEB7      		in r29,__SP_H__
+ 223               	/* prologue: function */
+ 224               	/* frame size = 2 */
+ 225 0106 982E      		mov r9,r24
+ 226 0108 C92E      		mov r12,r25
+ 227               	.LVL12:
+ 228               	.LM23:
+ 229 010a DD24      		clr r13
+ 230               	.LVL13:
+ 231 010c EE24      		clr r14
+ 232 010e FF24      		clr r15
+ 233               	.LVL14:
+ 234               	.LM24:
+ 235 0110 5E01      		movw r10,r28
+ 236 0112 0894      		sec
+ 237 0114 A11C      		adc r10,__zero_reg__
+ 238 0116 B11C      		adc r11,__zero_reg__
+ 239 0118 00C0      		rjmp .L25
+ 240               	.LVL15:
+ 241               	.L21:
+ 242 011a F801      		movw r30,r16
+ 243 011c 8081      		ld r24,Z
+ 244 011e 9181      		ldd r25,Z+1
+ 245 0120 B501      		movw r22,r10
+ 246 0122 40E0      		ldi r20,lo8(0)
+ 247 0124 50E0      		ldi r21,hi8(0)
+ 248 0126 20E0      		ldi r18,lo8(0)
+ 249 0128 0E94 0000 		call xQueueGenericReceive
+ 250 012c 8130      		cpi r24,lo8(1)
+ 251 012e 01F4      		brne .L25
+ 252               	.LM25:
+ 253 0130 2981      		ldd r18,Y+1
+ 254 0132 3A81      		ldd r19,Y+2
+ 255 0134 2E15      		cp r18,r14
+ 256 0136 3F05      		cpc r19,r15
+ 257 0138 01F0      		breq .L19
+ 258 013a DD24      		clr r13
+ 259 013c D394      		inc r13
+ 260 013e 00C0      		rjmp .L20
+ 261               	.L19:
+ 262               	.LM26:
+ 263 0140 DD20      		tst r13
+ 264 0142 01F4      		brne .L20
+ 265               	.LM27:
+ 266               	/* #APP */
+ 267               	 ;  221 "../Common/Minimal/PollQ.c" 1
+ 268 0144 0FB6      		in		__tmp_reg__, __SREG__
+ 269               	 ;  0 "" 2
+ 270               	 ;  221 "../Common/Minimal/PollQ.c" 1
+ 271 0146 F894      		cli
+ 272               	 ;  0 "" 2
+ 273               	 ;  221 "../Common/Minimal/PollQ.c" 1
+ 274 0148 0F92      		push	__tmp_reg__
+ 275               	 ;  0 "" 2
+ 276               	.LM28:
+ 277               	/* #NOAPP */
+ 278 014a 8091 0000 		lds r24,xPollingConsumerCount
+ 279 014e 8F5F      		subi r24,lo8(-(1))
+ 280 0150 8093 0000 		sts xPollingConsumerCount,r24
+ 281               	.LM29:
+ 282               	/* #APP */
+ 283               	 ;  223 "../Common/Minimal/PollQ.c" 1
+ 284 0154 0F90      		pop		__tmp_reg__
+ 285               	 ;  0 "" 2
+ 286               	 ;  223 "../Common/Minimal/PollQ.c" 1
+ 287 0156 0FBE      		out		__SREG__, __tmp_reg__
+ 288               	 ;  0 "" 2
+ 289               	/* #NOAPP */
+ 290               	.L20:
+ 291               	.LM30:
+ 292 0158 7901      		movw r14,r18
+ 293 015a 0894      		sec
+ 294 015c E11C      		adc r14,__zero_reg__
+ 295 015e F11C      		adc r15,__zero_reg__
+ 296               	.LVL16:
+ 297               	.L25:
+ 298               	.LM31:
+ 299 0160 092D      		mov r16,r9
+ 300 0162 1C2D      		mov r17,r12
+ 301 0164 F801      		movw r30,r16
+ 302 0166 8081      		ld r24,Z
+ 303 0168 9181      		ldd r25,Z+1
+ 304 016a 0E94 0000 		call uxQueueMessagesWaiting
+ 305 016e 8823      		tst r24
+ 306 0170 01F4      		brne .L21
+ 307               	.LM32:
+ 308 0172 8FEE      		ldi r24,lo8(-17)
+ 309 0174 9FEF      		ldi r25,hi8(-17)
+ 310 0176 0E94 0000 		call vTaskDelay
+ 311 017a 00C0      		rjmp .L25
+ 312               	.LFE4:
+ 314               		.lcomm xPollingConsumerCount,1
+ 315               		.lcomm xPollingProducerCount,1
+ 316               		.lcomm xPolledQueue.1742,2
+ 365               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 PollQ.c
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:2      *ABS*:0000003f __SREG__
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:5      *ABS*:00000034 __CCP__
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:18     .text:00000000 xArePollingQueuesStillRunning
+                             .bss:00000000 xPollingConsumerCount
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:314    .bss:00000001 xPollingProducerCount
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:48     .text:0000001a vStartPolledQueueTasks
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:315    .bss:00000002 xPolledQueue.1742
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:205    .text:000000ea vPolledQueueConsumer
+C:\Users\Tintu\AppData\Local\Temp/ccihBUoq.s:105    .text:00000072 vPolledQueueProducer
+
+UNDEFINED SYMBOLS
+xQueueGenericCreate
+xTaskCreate
+xQueueGenericSend
+vTaskDelay
+xQueueGenericReceive
+uxQueueMessagesWaiting
+__do_copy_data
+__do_clear_bss

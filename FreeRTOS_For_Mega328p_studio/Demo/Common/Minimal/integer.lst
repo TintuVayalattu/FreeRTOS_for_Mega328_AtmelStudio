@@ -1,0 +1,217 @@
+   1               		.file	"integer.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  17               	vCompeteingIntMathTask:
+  18               	.LFB3:
+  19               	.LM1:
+  20               	.LVL0:
+  21 0000 9F92      		push r9
+  22 0002 AF92      		push r10
+  23 0004 BF92      		push r11
+  24 0006 CF92      		push r12
+  25 0008 DF92      		push r13
+  26 000a EF92      		push r14
+  27 000c FF92      		push r15
+  28 000e 0F93      		push r16
+  29 0010 1F93      		push r17
+  30 0012 DF93      		push r29
+  31 0014 CF93      		push r28
+  32 0016 00D0      		rcall .
+  33 0018 00D0      		rcall .
+  34 001a CDB7      		in r28,__SP_L__
+  35 001c DEB7      		in r29,__SP_H__
+  36               	/* prologue: function */
+  37               	/* frame size = 4 */
+  38               	.LM2:
+  39 001e 8C01      		movw r16,r24
+  40               	.LVL1:
+  41 0020 EE24      		clr r14
+  42 0022 FF24      		clr r15
+  43               	.LVL2:
+  44               	.LM3:
+  45 0024 9BE7      		ldi r25,lo8(123)
+  46 0026 A92E      		mov r10,r25
+  47 0028 B12C      		mov r11,__zero_reg__
+  48 002a C12C      		mov r12,__zero_reg__
+  49 002c D12C      		mov r13,__zero_reg__
+  50               	.LM4:
+  51 002e 9924      		clr r9
+  52 0030 9394      		inc r9
+  53 0032 00C0      		rjmp .L5
+  54               	.LVL3:
+  55               	.L3:
+  56               	.LM5:
+  57 0034 81E0      		ldi r24,lo8(1)
+  58 0036 E82E      		mov r14,r24
+  59 0038 F12C      		mov r15,__zero_reg__
+  60               	.L5:
+  61               	.LM6:
+  62 003a A982      		std Y+1,r10
+  63 003c BA82      		std Y+2,r11
+  64 003e CB82      		std Y+3,r12
+  65 0040 DC82      		std Y+4,r13
+  66               	.LVL4:
+  67               	.LM7:
+  68 0042 8981      		ldd r24,Y+1
+  69 0044 9A81      		ldd r25,Y+2
+  70 0046 AB81      		ldd r26,Y+3
+  71 0048 BC81      		ldd r27,Y+4
+  72 004a 895B      		subi r24,lo8(-(234567))
+  73 004c 9B46      		sbci r25,hi8(-(234567))
+  74 004e AC4F      		sbci r26,hlo8(-(234567))
+  75 0050 BF4F      		sbci r27,hhi8(-(234567))
+  76 0052 8983      		std Y+1,r24
+  77 0054 9A83      		std Y+2,r25
+  78 0056 AB83      		std Y+3,r26
+  79 0058 BC83      		std Y+4,r27
+  80               	.LVL5:
+  81               	.LM8:
+  82 005a 6981      		ldd r22,Y+1
+  83 005c 7A81      		ldd r23,Y+2
+  84 005e 8B81      		ldd r24,Y+3
+  85 0060 9C81      		ldd r25,Y+4
+  86 0062 2DEF      		ldi r18,lo8(-3)
+  87 0064 3FEF      		ldi r19,hi8(-3)
+  88 0066 4FEF      		ldi r20,hlo8(-3)
+  89 0068 5FEF      		ldi r21,hhi8(-3)
+  90 006a 0E94 0000 		call __mulsi3
+  91 006e 6983      		std Y+1,r22
+  92 0070 7A83      		std Y+2,r23
+  93 0072 8B83      		std Y+3,r24
+  94 0074 9C83      		std Y+4,r25
+  95               	.LM9:
+  96 0076 6981      		ldd r22,Y+1
+  97 0078 7A81      		ldd r23,Y+2
+  98 007a 8B81      		ldd r24,Y+3
+  99 007c 9C81      		ldd r25,Y+4
+ 100 007e 27E0      		ldi r18,lo8(7)
+ 101 0080 30E0      		ldi r19,hi8(7)
+ 102 0082 40E0      		ldi r20,hlo8(7)
+ 103 0084 50E0      		ldi r21,hhi8(7)
+ 104 0086 0E94 0000 		call __divmodsi4
+ 105 008a C901      		movw r24,r18
+ 106 008c DA01      		movw r26,r20
+ 107 008e 8983      		std Y+1,r24
+ 108 0090 9A83      		std Y+2,r25
+ 109 0092 AB83      		std Y+3,r26
+ 110 0094 BC83      		std Y+4,r27
+ 111               	.LM10:
+ 112 0096 8981      		ldd r24,Y+1
+ 113 0098 9A81      		ldd r25,Y+2
+ 114 009a AB81      		ldd r26,Y+3
+ 115 009c BC81      		ldd r27,Y+4
+ 116 009e 8B51      		subi r24,lo8(-100581)
+ 117 00a0 9747      		sbci r25,hi8(-100581)
+ 118 00a2 AE4F      		sbci r26,hlo8(-100581)
+ 119 00a4 BF4F      		sbci r27,hhi8(-100581)
+ 120 00a6 01F4      		brne .L3
+ 121               	.LM11:
+ 122 00a8 E114      		cp r14,__zero_reg__
+ 123 00aa F104      		cpc r15,__zero_reg__
+ 124 00ac 01F0      		breq .+2
+ 125 00ae 00C0      		rjmp .L3
+ 126               	.LM12:
+ 127               	/* #APP */
+ 128               	 ;  167 "../Common/Minimal/integer.c" 1
+ 129 00b0 0FB6      		in		__tmp_reg__, __SREG__
+ 130               	 ;  0 "" 2
+ 131               	 ;  167 "../Common/Minimal/integer.c" 1
+ 132 00b2 F894      		cli
+ 133               	 ;  0 "" 2
+ 134               	 ;  167 "../Common/Minimal/integer.c" 1
+ 135 00b4 0F92      		push	__tmp_reg__
+ 136               	 ;  0 "" 2
+ 137               	.LM13:
+ 138               	/* #NOAPP */
+ 139 00b6 F801      		movw r30,r16
+ 140 00b8 9082      		st Z,r9
+ 141               	.LM14:
+ 142               	/* #APP */
+ 143               	 ;  169 "../Common/Minimal/integer.c" 1
+ 144 00ba 0F90      		pop		__tmp_reg__
+ 145               	 ;  0 "" 2
+ 146               	 ;  169 "../Common/Minimal/integer.c" 1
+ 147 00bc 0FBE      		out		__SREG__, __tmp_reg__
+ 148               	 ;  0 "" 2
+ 149               	/* #NOAPP */
+ 150 00be 00C0      		rjmp .L5
+ 151               	.LFE3:
+ 153               	.global	xAreIntegerMathsTaskStillRunning
+ 155               	xAreIntegerMathsTaskStillRunning:
+ 156               	.LFB4:
+ 157               	.LM15:
+ 158               	/* prologue: function */
+ 159               	/* frame size = 0 */
+ 160               	.LM16:
+ 161 00c0 8091 0000 		lds r24,xTaskCheck
+ 162               	.LM17:
+ 163 00c4 1092 0000 		sts xTaskCheck,__zero_reg__
+ 164 00c8 8111      		cpse r24,__zero_reg__
+ 165 00ca 81E0      		ldi r24,lo8(1)
+ 166               	.L7:
+ 167               	.LM18:
+ 168 00cc 0895      		ret
+ 169               	.LFE4:
+ 171               		.data
+ 172               	.LC0:
+ 173 0000 496E 744D 		.string	"IntMath"
+ 173      6174 6800 
+ 174               		.text
+ 175               	.global	vStartIntegerMathTasks
+ 177               	vStartIntegerMathTasks:
+ 178               	.LFB2:
+ 179               	.LM19:
+ 180               	.LVL6:
+ 181 00ce EF92      		push r14
+ 182 00d0 FF92      		push r15
+ 183 00d2 0F93      		push r16
+ 184               	/* prologue: function */
+ 185               	/* frame size = 0 */
+ 186 00d4 082F      		mov r16,r24
+ 187               	.LM20:
+ 188 00d6 80E0      		ldi r24,lo8(gs(vCompeteingIntMathTask))
+ 189 00d8 90E0      		ldi r25,hi8(gs(vCompeteingIntMathTask))
+ 190               	.LVL7:
+ 191 00da 60E0      		ldi r22,lo8(.LC0)
+ 192 00dc 70E0      		ldi r23,hi8(.LC0)
+ 193 00de 45E5      		ldi r20,lo8(85)
+ 194 00e0 50E0      		ldi r21,hi8(85)
+ 195 00e2 20E0      		ldi r18,lo8(xTaskCheck)
+ 196 00e4 30E0      		ldi r19,hi8(xTaskCheck)
+ 197 00e6 EE24      		clr r14
+ 198 00e8 FF24      		clr r15
+ 199 00ea 0E94 0000 		call xTaskCreate
+ 200               	/* epilogue start */
+ 201               	.LM21:
+ 202 00ee 0F91      		pop r16
+ 203               	.LVL8:
+ 204 00f0 FF90      		pop r15
+ 205 00f2 EF90      		pop r14
+ 206 00f4 0895      		ret
+ 207               	.LFE2:
+ 209               		.lcomm xTaskCheck,1
+ 250               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 integer.c
+C:\Users\Tintu\AppData\Local\Temp/ccqVVcud.s:2      *ABS*:0000003f __SREG__
+C:\Users\Tintu\AppData\Local\Temp/ccqVVcud.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Tintu\AppData\Local\Temp/ccqVVcud.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Tintu\AppData\Local\Temp/ccqVVcud.s:5      *ABS*:00000034 __CCP__
+C:\Users\Tintu\AppData\Local\Temp/ccqVVcud.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccqVVcud.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccqVVcud.s:17     .text:00000000 vCompeteingIntMathTask
+C:\Users\Tintu\AppData\Local\Temp/ccqVVcud.s:155    .text:000000c0 xAreIntegerMathsTaskStillRunning
+                             .bss:00000000 xTaskCheck
+C:\Users\Tintu\AppData\Local\Temp/ccqVVcud.s:177    .text:000000ce vStartIntegerMathTasks
+
+UNDEFINED SYMBOLS
+__mulsi3
+__divmodsi4
+xTaskCreate
+__do_copy_data
+__do_clear_bss

@@ -1,0 +1,260 @@
+   1               		.file	"adc_basic.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	ADC_0_init
+  18               	ADC_0_init:
+  19               	.LFB2:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 E4E6      		ldi r30,lo8(100)
+  25 0002 F0E0      		ldi r31,hi8(100)
+  26 0004 8081      		ld r24,Z
+  27 0006 8E7F      		andi r24,lo8(-2)
+  28 0008 8083      		st Z,r24
+  29               	.LM3:
+  30 000a 1092 7C00 		sts 124,__zero_reg__
+  31               	.LM4:
+  32 000e 81E8      		ldi r24,lo8(-127)
+  33 0010 8093 7A00 		sts 122,r24
+  34               	.LM5:
+  35 0014 1092 7B00 		sts 123,__zero_reg__
+  36               	.LM6:
+  37 0018 1092 7E00 		sts 126,__zero_reg__
+  38               	.LM7:
+  39 001c 80E0      		ldi r24,lo8(0)
+  40               	/* epilogue start */
+  41 001e 0895      		ret
+  42               	.LFE2:
+  44               	.global	ADC_0_enable
+  46               	ADC_0_enable:
+  47               	.LFB3:
+  48               	.LM8:
+  49               	/* prologue: function */
+  50               	/* frame size = 0 */
+  51               	.LM9:
+  52 0020 EAE7      		ldi r30,lo8(122)
+  53 0022 F0E0      		ldi r31,hi8(122)
+  54 0024 8081      		ld r24,Z
+  55 0026 8068      		ori r24,lo8(-128)
+  56 0028 8083      		st Z,r24
+  57               	/* epilogue start */
+  58               	.LM10:
+  59 002a 0895      		ret
+  60               	.LFE3:
+  62               	.global	ADC_0_disable
+  64               	ADC_0_disable:
+  65               	.LFB4:
+  66               	.LM11:
+  67               	/* prologue: function */
+  68               	/* frame size = 0 */
+  69               	.LM12:
+  70 002c EAE7      		ldi r30,lo8(122)
+  71 002e F0E0      		ldi r31,hi8(122)
+  72 0030 8081      		ld r24,Z
+  73 0032 8F77      		andi r24,lo8(127)
+  74 0034 8083      		st Z,r24
+  75               	/* epilogue start */
+  76               	.LM13:
+  77 0036 0895      		ret
+  78               	.LFE4:
+  80               	.global	ADC_0_start_conversion
+  82               	ADC_0_start_conversion:
+  83               	.LFB5:
+  84               	.LM14:
+  85               	.LVL0:
+  86               	/* prologue: function */
+  87               	/* frame size = 0 */
+  88               	.LM15:
+  89 0038 ECE7      		ldi r30,lo8(124)
+  90 003a F0E0      		ldi r31,hi8(124)
+  91 003c 9081      		ld r25,Z
+  92 003e 907F      		andi r25,lo8(-16)
+  93 0040 9083      		st Z,r25
+  94               	.LM16:
+  95 0042 9081      		ld r25,Z
+  96 0044 982B      		or r25,r24
+  97 0046 9083      		st Z,r25
+  98               	.LM17:
+  99 0048 EAE7      		ldi r30,lo8(122)
+ 100 004a F0E0      		ldi r31,hi8(122)
+ 101 004c 8081      		ld r24,Z
+ 102               	.LVL1:
+ 103 004e 8064      		ori r24,lo8(64)
+ 104 0050 8083      		st Z,r24
+ 105               	/* epilogue start */
+ 106               	.LM18:
+ 107 0052 0895      		ret
+ 108               	.LFE5:
+ 110               	.global	ADC_0_is_conversion_done
+ 112               	ADC_0_is_conversion_done:
+ 113               	.LFB6:
+ 114               	.LM19:
+ 115               	/* prologue: function */
+ 116               	/* frame size = 0 */
+ 117               	.LM20:
+ 118 0054 8091 7A00 		lds r24,122
+ 119 0058 90E0      		ldi r25,lo8(0)
+ 120 005a 24E0      		ldi r18,4
+ 121 005c 9695      	1:	lsr r25
+ 122 005e 8795      		ror r24
+ 123 0060 2A95      		dec r18
+ 124 0062 01F4      		brne 1b
+ 125               	.LM21:
+ 126 0064 8170      		andi r24,lo8(1)
+ 127               	/* epilogue start */
+ 128 0066 0895      		ret
+ 129               	.LFE6:
+ 131               	.global	ADC_0_get_conversion_result
+ 133               	ADC_0_get_conversion_result:
+ 134               	.LFB7:
+ 135               	.LM22:
+ 136               	/* prologue: function */
+ 137               	/* frame size = 0 */
+ 138               	.LM23:
+ 139 0068 2091 7800 		lds r18,120
+ 140 006c 4091 7900 		lds r20,121
+ 141 0070 942F      		mov r25,r20
+ 142 0072 80E0      		ldi r24,lo8(0)
+ 143 0074 30E0      		ldi r19,lo8(0)
+ 144 0076 282B      		or r18,r24
+ 145 0078 392B      		or r19,r25
+ 146               	.LM24:
+ 147 007a C901      		movw r24,r18
+ 148               	/* epilogue start */
+ 149 007c 0895      		ret
+ 150               	.LFE7:
+ 152               	.global	ADC_0_get_conversion
+ 154               	ADC_0_get_conversion:
+ 155               	.LFB8:
+ 156               	.LM25:
+ 157               	.LVL2:
+ 158               	/* prologue: function */
+ 159               	/* frame size = 0 */
+ 160               	.LBB8:
+ 161               	.LBB9:
+ 162               	.LM26:
+ 163 007e 9091 7C00 		lds r25,124
+ 164 0082 907F      		andi r25,lo8(-16)
+ 165 0084 9093 7C00 		sts 124,r25
+ 166               	.LM27:
+ 167 0088 9091 7C00 		lds r25,124
+ 168 008c 982B      		or r25,r24
+ 169 008e 9093 7C00 		sts 124,r25
+ 170               	.LM28:
+ 171 0092 8091 7A00 		lds r24,122
+ 172               	.LVL3:
+ 173 0096 8064      		ori r24,lo8(64)
+ 174 0098 8093 7A00 		sts 122,r24
+ 175               	.L14:
+ 176               	.LBE9:
+ 177               	.LBE8:
+ 178               	.LBB10:
+ 179               	.LBB11:
+ 180               	.LM29:
+ 181 009c 8091 7A00 		lds r24,122
+ 182               	.LBE11:
+ 183               	.LBE10:
+ 184               	.LM30:
+ 185 00a0 84FF      		sbrs r24,4
+ 186 00a2 00C0      		rjmp .L14
+ 187               	.LBB12:
+ 188               	.LBB13:
+ 189               	.LM31:
+ 190 00a4 2091 7800 		lds r18,120
+ 191 00a8 4091 7900 		lds r20,121
+ 192               	.LBE13:
+ 193               	.LBE12:
+ 194               	.LM32:
+ 195 00ac 8091 7A00 		lds r24,122
+ 196 00b0 8061      		ori r24,lo8(16)
+ 197 00b2 8093 7A00 		sts 122,r24
+ 198 00b6 942F      		mov r25,r20
+ 199 00b8 80E0      		ldi r24,lo8(0)
+ 200 00ba 30E0      		ldi r19,lo8(0)
+ 201 00bc 282B      		or r18,r24
+ 202 00be 392B      		or r19,r25
+ 203               	.LM33:
+ 204 00c0 C901      		movw r24,r18
+ 205               	/* epilogue start */
+ 206 00c2 0895      		ret
+ 207               	.LFE8:
+ 209               	.global	ADC_0_get_resolution
+ 211               	ADC_0_get_resolution:
+ 212               	.LFB9:
+ 213               	.LM34:
+ 214               	/* prologue: function */
+ 215               	/* frame size = 0 */
+ 216               	.LM35:
+ 217 00c4 8AE0      		ldi r24,lo8(10)
+ 218               	/* epilogue start */
+ 219 00c6 0895      		ret
+ 220               	.LFE9:
+ 222               	.global	ADC_0_register_callback
+ 224               	ADC_0_register_callback:
+ 225               	.LFB10:
+ 226               	.LM36:
+ 227               	.LVL4:
+ 228               	/* prologue: function */
+ 229               	/* frame size = 0 */
+ 230               	.LM37:
+ 231 00c8 9093 0000 		sts (ADC_0_cb)+1,r25
+ 232 00cc 8093 0000 		sts ADC_0_cb,r24
+ 233               	/* epilogue start */
+ 234               	.LM38:
+ 235 00d0 0895      		ret
+ 236               	.LFE10:
+ 238               	.global	ISR
+ 240               	ISR:
+ 241               	.LFB11:
+ 242               	.LM39:
+ 243               	.LVL5:
+ 244               	/* prologue: function */
+ 245               	/* frame size = 0 */
+ 246               	.LM40:
+ 247 00d2 E091 0000 		lds r30,ADC_0_cb
+ 248 00d6 F091 0000 		lds r31,(ADC_0_cb)+1
+ 249 00da 3097      		sbiw r30,0
+ 250 00dc 01F0      		breq .L24
+ 251               	.LM41:
+ 252 00de 0995      		icall
+ 253               	.LVL6:
+ 254               	.L24:
+ 255               	.LVL7:
+ 256               	.LM42:
+ 257 00e0 0895      		ret
+ 258               	.LFE11:
+ 260               	.global	ADC_0_cb
+ 261               	.global	ADC_0_cb
+ 262               		.section .bss
+ 265               	ADC_0_cb:
+ 266 0000 0000      		.skip 2,0
+ 363               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 adc_basic.c
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:2      *ABS*:0000003f __SREG__
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:5      *ABS*:00000034 __CCP__
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:18     .text:00000000 ADC_0_init
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:46     .text:00000020 ADC_0_enable
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:64     .text:0000002c ADC_0_disable
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:82     .text:00000038 ADC_0_start_conversion
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:112    .text:00000054 ADC_0_is_conversion_done
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:133    .text:00000068 ADC_0_get_conversion_result
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:154    .text:0000007e ADC_0_get_conversion
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:211    .text:000000c4 ADC_0_get_resolution
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:224    .text:000000c8 ADC_0_register_callback
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:265    .bss:00000000 ADC_0_cb
+C:\Users\Tintu\AppData\Local\Temp/cc6HgEZd.s:240    .text:000000d2 ISR
+
+UNDEFINED SYMBOLS
+__do_clear_bss

@@ -1,0 +1,267 @@
+   1               		.file	"list.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	vListInitialise
+  18               	vListInitialise:
+  19               	.LFB2:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24 0000 FC01      		movw r30,r24
+  25               	.LM2:
+  26 0002 9C01      		movw r18,r24
+  27 0004 2D5F      		subi r18,lo8(-(3))
+  28 0006 3F4F      		sbci r19,hi8(-(3))
+  29 0008 3283      		std Z+2,r19
+  30 000a 2183      		std Z+1,r18
+  31               	.LM3:
+  32 000c 8FEF      		ldi r24,lo8(-1)
+  33 000e 9FEF      		ldi r25,hi8(-1)
+  34               	.LVL1:
+  35 0010 9483      		std Z+4,r25
+  36 0012 8383      		std Z+3,r24
+  37               	.LM4:
+  38 0014 3683      		std Z+6,r19
+  39 0016 2583      		std Z+5,r18
+  40               	.LM5:
+  41 0018 3087      		std Z+8,r19
+  42 001a 2783      		std Z+7,r18
+  43               	.LM6:
+  44 001c 1082      		st Z,__zero_reg__
+  45               	/* epilogue start */
+  46               	.LM7:
+  47 001e 0895      		ret
+  48               	.LFE2:
+  50               	.global	vListInitialiseItem
+  52               	vListInitialiseItem:
+  53               	.LFB3:
+  54               	.LM8:
+  55               	.LVL2:
+  56               	/* prologue: function */
+  57               	/* frame size = 0 */
+  58               	.LM9:
+  59 0020 FC01      		movw r30,r24
+  60 0022 1186      		std Z+9,__zero_reg__
+  61 0024 1086      		std Z+8,__zero_reg__
+  62               	/* epilogue start */
+  63               	.LM10:
+  64 0026 0895      		ret
+  65               	.LFE3:
+  67               	.global	vListInsertEnd
+  69               	vListInsertEnd:
+  70               	.LFB4:
+  71               	.LM11:
+  72               	.LVL3:
+  73               	/* prologue: function */
+  74               	/* frame size = 0 */
+  75 0028 AC01      		movw r20,r24
+  76               	.LM12:
+  77 002a FC01      		movw r30,r24
+  78 002c A181      		ldd r26,Z+1
+  79 002e B281      		ldd r27,Z+2
+  80               	.LVL4:
+  81               	.LM13:
+  82 0030 FB01      		movw r30,r22
+  83 0032 B383      		std Z+3,r27
+  84 0034 A283      		std Z+2,r26
+  85               	.LM14:
+  86 0036 1496      		adiw r26,4
+  87 0038 8D91      		ld r24,X+
+  88 003a 9C91      		ld r25,X
+  89 003c 1597      		sbiw r26,4+1
+  90               	.LVL5:
+  91 003e 9583      		std Z+5,r25
+  92 0040 8483      		std Z+4,r24
+  93               	.LM15:
+  94 0042 1496      		adiw r26,4
+  95 0044 ED91      		ld r30,X+
+  96 0046 FC91      		ld r31,X
+  97 0048 1597      		sbiw r26,4+1
+  98 004a 7383      		std Z+3,r23
+  99 004c 6283      		std Z+2,r22
+ 100               	.LM16:
+ 101 004e 1596      		adiw r26,4+1
+ 102 0050 7C93      		st X,r23
+ 103 0052 6E93      		st -X,r22
+ 104 0054 1497      		sbiw r26,4
+ 105               	.LM17:
+ 106 0056 FB01      		movw r30,r22
+ 107 0058 5187      		std Z+9,r21
+ 108 005a 4087      		std Z+8,r20
+ 109               	.LM18:
+ 110 005c FA01      		movw r30,r20
+ 111 005e 8081      		ld r24,Z
+ 112 0060 8F5F      		subi r24,lo8(-(1))
+ 113 0062 8083      		st Z,r24
+ 114               	/* epilogue start */
+ 115               	.LM19:
+ 116 0064 0895      		ret
+ 117               	.LFE4:
+ 119               	.global	vListInsert
+ 121               	vListInsert:
+ 122               	.LFB5:
+ 123               	.LM20:
+ 124               	.LVL6:
+ 125 0066 CF93      		push r28
+ 126 0068 DF93      		push r29
+ 127               	/* prologue: function */
+ 128               	/* frame size = 0 */
+ 129 006a 9C01      		movw r18,r24
+ 130 006c EB01      		movw r28,r22
+ 131               	.LM21:
+ 132 006e 4881      		ld r20,Y
+ 133 0070 5981      		ldd r21,Y+1
+ 134               	.LVL7:
+ 135               	.LM22:
+ 136 0072 8FEF      		ldi r24,hi8(-1)
+ 137 0074 4F3F      		cpi r20,lo8(-1)
+ 138 0076 5807      		cpc r21,r24
+ 139               	.LVL8:
+ 140 0078 01F4      		brne .L8
+ 141               	.LVL9:
+ 142               	.LM23:
+ 143 007a F901      		movw r30,r18
+ 144 007c A781      		ldd r26,Z+7
+ 145 007e B085      		ldd r27,Z+8
+ 146               	.LVL10:
+ 147 0080 00C0      		rjmp .L9
+ 148               	.LVL11:
+ 149               	.L8:
+ 150               	.LM24:
+ 151 0082 D901      		movw r26,r18
+ 152               	.LVL12:
+ 153 0084 1396      		adiw r26,3
+ 154               	.LVL13:
+ 155               	.L10:
+ 156 0086 1296      		adiw r26,2
+ 157 0088 ED91      		ld r30,X+
+ 158 008a FC91      		ld r31,X
+ 159 008c 1397      		sbiw r26,2+1
+ 160               	.LVL14:
+ 161 008e 8081      		ld r24,Z
+ 162 0090 9181      		ldd r25,Z+1
+ 163 0092 4817      		cp r20,r24
+ 164 0094 5907      		cpc r21,r25
+ 165 0096 00F0      		brlo .L9
+ 166 0098 DF01      		movw r26,r30
+ 167 009a 00C0      		rjmp .L10
+ 168               	.L9:
+ 169               	.LM25:
+ 170 009c 1296      		adiw r26,2
+ 171 009e ED91      		ld r30,X+
+ 172 00a0 FC91      		ld r31,X
+ 173 00a2 1397      		sbiw r26,2+1
+ 174               	.LVL15:
+ 175 00a4 FB83      		std Y+3,r31
+ 176 00a6 EA83      		std Y+2,r30
+ 177               	.LM26:
+ 178 00a8 D583      		std Z+5,r29
+ 179 00aa C483      		std Z+4,r28
+ 180               	.LM27:
+ 181 00ac BD83      		std Y+5,r27
+ 182 00ae AC83      		std Y+4,r26
+ 183               	.LM28:
+ 184 00b0 1396      		adiw r26,2+1
+ 185 00b2 DC93      		st X,r29
+ 186 00b4 CE93      		st -X,r28
+ 187 00b6 1297      		sbiw r26,2
+ 188               	.LM29:
+ 189 00b8 3987      		std Y+9,r19
+ 190 00ba 2887      		std Y+8,r18
+ 191               	.LM30:
+ 192 00bc F901      		movw r30,r18
+ 193 00be 8081      		ld r24,Z
+ 194 00c0 8F5F      		subi r24,lo8(-(1))
+ 195 00c2 8083      		st Z,r24
+ 196               	/* epilogue start */
+ 197               	.LM31:
+ 198 00c4 DF91      		pop r29
+ 199 00c6 CF91      		pop r28
+ 200               	.LVL16:
+ 201 00c8 0895      		ret
+ 202               	.LFE5:
+ 204               	.global	uxListRemove
+ 206               	uxListRemove:
+ 207               	.LFB6:
+ 208               	.LM32:
+ 209               	.LVL17:
+ 210 00ca CF93      		push r28
+ 211 00cc DF93      		push r29
+ 212               	/* prologue: function */
+ 213               	/* frame size = 0 */
+ 214 00ce DC01      		movw r26,r24
+ 215               	.LM33:
+ 216 00d0 1896      		adiw r26,8
+ 217 00d2 CD91      		ld r28,X+
+ 218 00d4 DC91      		ld r29,X
+ 219 00d6 1997      		sbiw r26,8+1
+ 220               	.LVL18:
+ 221               	.LM34:
+ 222 00d8 1296      		adiw r26,2
+ 223 00da 4D91      		ld r20,X+
+ 224 00dc 5C91      		ld r21,X
+ 225 00de 1397      		sbiw r26,2+1
+ 226 00e0 1496      		adiw r26,4
+ 227 00e2 8D91      		ld r24,X+
+ 228 00e4 9C91      		ld r25,X
+ 229 00e6 1597      		sbiw r26,4+1
+ 230               	.LVL19:
+ 231 00e8 FA01      		movw r30,r20
+ 232 00ea 9583      		std Z+5,r25
+ 233 00ec 8483      		std Z+4,r24
+ 234               	.LM35:
+ 235 00ee 1496      		adiw r26,4
+ 236 00f0 2D91      		ld r18,X+
+ 237 00f2 3C91      		ld r19,X
+ 238 00f4 1597      		sbiw r26,4+1
+ 239 00f6 F901      		movw r30,r18
+ 240 00f8 5383      		std Z+3,r21
+ 241 00fa 4283      		std Z+2,r20
+ 242               	.LM36:
+ 243 00fc 8981      		ldd r24,Y+1
+ 244 00fe 9A81      		ldd r25,Y+2
+ 245 0100 8A17      		cp r24,r26
+ 246 0102 9B07      		cpc r25,r27
+ 247 0104 01F4      		brne .L13
+ 248               	.LM37:
+ 249 0106 3A83      		std Y+2,r19
+ 250 0108 2983      		std Y+1,r18
+ 251               	.L13:
+ 252               	.LM38:
+ 253 010a 1996      		adiw r26,8+1
+ 254 010c 1C92      		st X,__zero_reg__
+ 255 010e 1E92      		st -X,__zero_reg__
+ 256 0110 1897      		sbiw r26,8
+ 257               	.LM39:
+ 258 0112 8881      		ld r24,Y
+ 259 0114 8150      		subi r24,lo8(-(-1))
+ 260 0116 8883      		st Y,r24
+ 261               	/* epilogue start */
+ 262               	.LM40:
+ 263 0118 DF91      		pop r29
+ 264 011a CF91      		pop r28
+ 265               	.LVL20:
+ 266 011c 0895      		ret
+ 267               	.LFE6:
+ 325               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 list.c
+C:\Users\Tintu\AppData\Local\Temp/ccZF1yAo.s:2      *ABS*:0000003f __SREG__
+C:\Users\Tintu\AppData\Local\Temp/ccZF1yAo.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Tintu\AppData\Local\Temp/ccZF1yAo.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Tintu\AppData\Local\Temp/ccZF1yAo.s:5      *ABS*:00000034 __CCP__
+C:\Users\Tintu\AppData\Local\Temp/ccZF1yAo.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccZF1yAo.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Tintu\AppData\Local\Temp/ccZF1yAo.s:18     .text:00000000 vListInitialise
+C:\Users\Tintu\AppData\Local\Temp/ccZF1yAo.s:52     .text:00000020 vListInitialiseItem
+C:\Users\Tintu\AppData\Local\Temp/ccZF1yAo.s:69     .text:00000028 vListInsertEnd
+C:\Users\Tintu\AppData\Local\Temp/ccZF1yAo.s:121    .text:00000066 vListInsert
+C:\Users\Tintu\AppData\Local\Temp/ccZF1yAo.s:206    .text:000000ca uxListRemove
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,1175 @@
+   1               		.file	"regtest.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	xAreRegTestTasksStillRunning
+  18               	xAreRegTestTasksStillRunning:
+  19               	.LFB3:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 90E0      		ldi r25,lo8(0)
+  25 0002 8091 0000 		lds r24,xRegTestError
+  26 0006 8823      		tst r24
+  27 0008 01F4      		brne .L2
+  28 000a 91E0      		ldi r25,lo8(1)
+  29               	.L2:
+  30               	.LM3:
+  31 000c 892F      		mov r24,r25
+  32               	/* epilogue start */
+  33 000e 0895      		ret
+  34               	.LFE3:
+  37               	prvRegisterCheck1:
+  38               	.LFB4:
+  39               	.LM4:
+  40               	/* prologue: function */
+  41               	/* frame size = 0 */
+  42               	.LVL0:
+  43               	.L5:
+  44               	.LM5:
+  45               	/* #APP */
+  46               	 ;  121 "regtest.c" 1
+  47 0010 F5E0      		LDI	r31,	5
+  48               	 ;  0 "" 2
+  49               	.LM6:
+  50               	 ;  122 "regtest.c" 1
+  51 0012 0F2E      		MOV	r0,		r31
+  52               	 ;  0 "" 2
+  53               	.LM7:
+  54               	 ;  123 "regtest.c" 1
+  55 0014 F6E0      		LDI	r31,	6
+  56               	 ;  0 "" 2
+  57               	.LM8:
+  58               	 ;  124 "regtest.c" 1
+  59 0016 1F2E      		MOV	r1,		r31
+  60               	 ;  0 "" 2
+  61               	.LM9:
+  62               	 ;  125 "regtest.c" 1
+  63 0018 F7E0      		LDI	r31,	7
+  64               	 ;  0 "" 2
+  65               	.LM10:
+  66               	 ;  126 "regtest.c" 1
+  67 001a 2F2E      		MOV	r2,		r31
+  68               	 ;  0 "" 2
+  69               	.LM11:
+  70               	 ;  127 "regtest.c" 1
+  71 001c F8E0      		LDI	r31,	8
+  72               	 ;  0 "" 2
+  73               	.LM12:
+  74               	 ;  128 "regtest.c" 1
+  75 001e 3F2E      		MOV	r3,		r31
+  76               	 ;  0 "" 2
+  77               	.LM13:
+  78               	 ;  129 "regtest.c" 1
+  79 0020 F9E0      		LDI	r31,	9
+  80               	 ;  0 "" 2
+  81               	.LM14:
+  82               	 ;  130 "regtest.c" 1
+  83 0022 4F2E      		MOV	r4,		r31
+  84               	 ;  0 "" 2
+  85               	.LM15:
+  86               	 ;  131 "regtest.c" 1
+  87 0024 FAE0      		LDI	r31,	10
+  88               	 ;  0 "" 2
+  89               	.LM16:
+  90               	 ;  132 "regtest.c" 1
+  91 0026 5F2E      		MOV	r5,		r31
+  92               	 ;  0 "" 2
+  93               	.LM17:
+  94               	 ;  133 "regtest.c" 1
+  95 0028 FBE0      		LDI	r31,	11
+  96               	 ;  0 "" 2
+  97               	.LM18:
+  98               	 ;  134 "regtest.c" 1
+  99 002a 6F2E      		MOV	r6,		r31
+ 100               	 ;  0 "" 2
+ 101               	.LM19:
+ 102               	 ;  135 "regtest.c" 1
+ 103 002c FCE0      		LDI	r31,	12
+ 104               	 ;  0 "" 2
+ 105               	.LM20:
+ 106               	 ;  136 "regtest.c" 1
+ 107 002e 7F2E      		MOV	r7,		r31
+ 108               	 ;  0 "" 2
+ 109               	.LM21:
+ 110               	 ;  137 "regtest.c" 1
+ 111 0030 FDE0      		LDI	r31,	13
+ 112               	 ;  0 "" 2
+ 113               	.LM22:
+ 114               	 ;  138 "regtest.c" 1
+ 115 0032 8F2E      		MOV	r8,		r31
+ 116               	 ;  0 "" 2
+ 117               	.LM23:
+ 118               	 ;  139 "regtest.c" 1
+ 119 0034 FEE0      		LDI	r31,	14
+ 120               	 ;  0 "" 2
+ 121               	.LM24:
+ 122               	 ;  140 "regtest.c" 1
+ 123 0036 9F2E      		MOV	r9,		r31
+ 124               	 ;  0 "" 2
+ 125               	.LM25:
+ 126               	 ;  141 "regtest.c" 1
+ 127 0038 FFE0      		LDI	r31,	15
+ 128               	 ;  0 "" 2
+ 129               	.LM26:
+ 130               	 ;  142 "regtest.c" 1
+ 131 003a AF2E      		MOV	r10,	r31
+ 132               	 ;  0 "" 2
+ 133               	.LM27:
+ 134               	 ;  143 "regtest.c" 1
+ 135 003c F0E1      		LDI	r31,	16
+ 136               	 ;  0 "" 2
+ 137               	.LM28:
+ 138               	 ;  144 "regtest.c" 1
+ 139 003e BF2E      		MOV	r11,	r31
+ 140               	 ;  0 "" 2
+ 141               	.LM29:
+ 142               	 ;  145 "regtest.c" 1
+ 143 0040 F1E1      		LDI	r31,	17
+ 144               	 ;  0 "" 2
+ 145               	.LM30:
+ 146               	 ;  146 "regtest.c" 1
+ 147 0042 CF2E      		MOV	r12,	r31
+ 148               	 ;  0 "" 2
+ 149               	.LM31:
+ 150               	 ;  147 "regtest.c" 1
+ 151 0044 F2E1      		LDI	r31,	18
+ 152               	 ;  0 "" 2
+ 153               	.LM32:
+ 154               	 ;  148 "regtest.c" 1
+ 155 0046 DF2E      		MOV	r13,	r31
+ 156               	 ;  0 "" 2
+ 157               	.LM33:
+ 158               	 ;  149 "regtest.c" 1
+ 159 0048 F3E1      		LDI	r31,	19
+ 160               	 ;  0 "" 2
+ 161               	.LM34:
+ 162               	 ;  150 "regtest.c" 1
+ 163 004a EF2E      		MOV	r14,	r31
+ 164               	 ;  0 "" 2
+ 165               	.LM35:
+ 166               	 ;  151 "regtest.c" 1
+ 167 004c F4E1      		LDI	r31,	20
+ 168               	 ;  0 "" 2
+ 169               	.LM36:
+ 170               	 ;  152 "regtest.c" 1
+ 171 004e FF2E      		MOV	r15,	r31
+ 172               	 ;  0 "" 2
+ 173               	.LM37:
+ 174               	 ;  153 "regtest.c" 1
+ 175 0050 05E1      		LDI	r16,	21
+ 176               	 ;  0 "" 2
+ 177               	.LM38:
+ 178               	 ;  154 "regtest.c" 1
+ 179 0052 16E1      		LDI	r17,	22
+ 180               	 ;  0 "" 2
+ 181               	.LM39:
+ 182               	 ;  155 "regtest.c" 1
+ 183 0054 27E1      		LDI	r18,	23
+ 184               	 ;  0 "" 2
+ 185               	.LM40:
+ 186               	 ;  156 "regtest.c" 1
+ 187 0056 38E1      		LDI	r19,	24
+ 188               	 ;  0 "" 2
+ 189               	.LM41:
+ 190               	 ;  157 "regtest.c" 1
+ 191 0058 49E1      		LDI	r20,	25
+ 192               	 ;  0 "" 2
+ 193               	.LM42:
+ 194               	 ;  158 "regtest.c" 1
+ 195 005a 5AE1      		LDI	r21,	26
+ 196               	 ;  0 "" 2
+ 197               	.LM43:
+ 198               	 ;  159 "regtest.c" 1
+ 199 005c 6BE1      		LDI	r22,	27
+ 200               	 ;  0 "" 2
+ 201               	.LM44:
+ 202               	 ;  160 "regtest.c" 1
+ 203 005e 7CE1      		LDI	r23,	28
+ 204               	 ;  0 "" 2
+ 205               	.LM45:
+ 206               	 ;  161 "regtest.c" 1
+ 207 0060 8DE1      		LDI	r24,	29
+ 208               	 ;  0 "" 2
+ 209               	.LM46:
+ 210               	 ;  162 "regtest.c" 1
+ 211 0062 9EE1      		LDI	r25,	30
+ 212               	 ;  0 "" 2
+ 213               	.LM47:
+ 214               	 ;  163 "regtest.c" 1
+ 215 0064 AFE1      		LDI	r26,	31
+ 216               	 ;  0 "" 2
+ 217               	.LM48:
+ 218               	 ;  164 "regtest.c" 1
+ 219 0066 B0E2      		LDI	r27,	32
+ 220               	 ;  0 "" 2
+ 221               	.LM49:
+ 222               	 ;  165 "regtest.c" 1
+ 223 0068 E1E2      		LDI	r30,	33
+ 224               	 ;  0 "" 2
+ 225               	.LM50:
+ 226               	 ;  167 "regtest.c" 1
+ 227 006a F5E0      		LDI	r31,	5
+ 228               	 ;  0 "" 2
+ 229               	.LM51:
+ 230               	 ;  168 "regtest.c" 1
+ 231 006c F011      		CPSE	r31,	r0
+ 232               	 ;  0 "" 2
+ 233               	.LM52:
+ 234               	 ;  169 "regtest.c" 1
+ 235 006e 0092 0000 		STS	xRegTestError, r0
+ 236               	 ;  0 "" 2
+ 237               	.LM53:
+ 238               	 ;  170 "regtest.c" 1
+ 239 0072 F6E0      		LDI	r31,	6
+ 240               	 ;  0 "" 2
+ 241               	.LM54:
+ 242               	 ;  171 "regtest.c" 1
+ 243 0074 F111      		CPSE	r31,	r1
+ 244               	 ;  0 "" 2
+ 245               	.LM55:
+ 246               	 ;  172 "regtest.c" 1
+ 247 0076 0092 0000 		STS	xRegTestError, r0
+ 248               	 ;  0 "" 2
+ 249               	.LM56:
+ 250               	 ;  173 "regtest.c" 1
+ 251 007a F7E0      		LDI	r31,	7
+ 252               	 ;  0 "" 2
+ 253               	.LM57:
+ 254               	 ;  174 "regtest.c" 1
+ 255 007c F211      		CPSE	r31,	r2
+ 256               	 ;  0 "" 2
+ 257               	.LM58:
+ 258               	 ;  175 "regtest.c" 1
+ 259 007e 0092 0000 		STS	xRegTestError, r0
+ 260               	 ;  0 "" 2
+ 261               	.LM59:
+ 262               	 ;  176 "regtest.c" 1
+ 263 0082 F8E0      		LDI	r31,	8
+ 264               	 ;  0 "" 2
+ 265               	.LM60:
+ 266               	 ;  177 "regtest.c" 1
+ 267 0084 F311      		CPSE	r31,	r3
+ 268               	 ;  0 "" 2
+ 269               	.LM61:
+ 270               	 ;  178 "regtest.c" 1
+ 271 0086 0092 0000 		STS	xRegTestError, r0
+ 272               	 ;  0 "" 2
+ 273               	.LM62:
+ 274               	 ;  179 "regtest.c" 1
+ 275 008a F9E0      		LDI	r31,	9
+ 276               	 ;  0 "" 2
+ 277               	.LM63:
+ 278               	 ;  180 "regtest.c" 1
+ 279 008c F411      		CPSE	r31,	r4
+ 280               	 ;  0 "" 2
+ 281               	.LM64:
+ 282               	 ;  181 "regtest.c" 1
+ 283 008e 0092 0000 		STS	xRegTestError, r0
+ 284               	 ;  0 "" 2
+ 285               	.LM65:
+ 286               	 ;  182 "regtest.c" 1
+ 287 0092 FAE0      		LDI	r31,	10
+ 288               	 ;  0 "" 2
+ 289               	.LM66:
+ 290               	 ;  183 "regtest.c" 1
+ 291 0094 F511      		CPSE	r31,	r5
+ 292               	 ;  0 "" 2
+ 293               	.LM67:
+ 294               	 ;  184 "regtest.c" 1
+ 295 0096 0092 0000 		STS	xRegTestError, r0
+ 296               	 ;  0 "" 2
+ 297               	.LM68:
+ 298               	 ;  185 "regtest.c" 1
+ 299 009a FBE0      		LDI	r31,	11
+ 300               	 ;  0 "" 2
+ 301               	.LM69:
+ 302               	 ;  186 "regtest.c" 1
+ 303 009c F611      		CPSE	r31,	r6
+ 304               	 ;  0 "" 2
+ 305               	.LM70:
+ 306               	 ;  187 "regtest.c" 1
+ 307 009e 0092 0000 		STS	xRegTestError, r0
+ 308               	 ;  0 "" 2
+ 309               	.LM71:
+ 310               	 ;  188 "regtest.c" 1
+ 311 00a2 FCE0      		LDI	r31,	12
+ 312               	 ;  0 "" 2
+ 313               	.LM72:
+ 314               	 ;  189 "regtest.c" 1
+ 315 00a4 F711      		CPSE	r31,	r7
+ 316               	 ;  0 "" 2
+ 317               	.LM73:
+ 318               	 ;  190 "regtest.c" 1
+ 319 00a6 0092 0000 		STS	xRegTestError, r0
+ 320               	 ;  0 "" 2
+ 321               	.LM74:
+ 322               	 ;  191 "regtest.c" 1
+ 323 00aa FDE0      		LDI	r31,	13
+ 324               	 ;  0 "" 2
+ 325               	.LM75:
+ 326               	 ;  192 "regtest.c" 1
+ 327 00ac F811      		CPSE	r31,	r8
+ 328               	 ;  0 "" 2
+ 329               	.LM76:
+ 330               	 ;  193 "regtest.c" 1
+ 331 00ae 0092 0000 		STS	xRegTestError, r0
+ 332               	 ;  0 "" 2
+ 333               	.LM77:
+ 334               	 ;  194 "regtest.c" 1
+ 335 00b2 FEE0      		LDI	r31,	14
+ 336               	 ;  0 "" 2
+ 337               	.LM78:
+ 338               	 ;  195 "regtest.c" 1
+ 339 00b4 F911      		CPSE	r31,	r9
+ 340               	 ;  0 "" 2
+ 341               	.LM79:
+ 342               	 ;  196 "regtest.c" 1
+ 343 00b6 0092 0000 		STS	xRegTestError, r0
+ 344               	 ;  0 "" 2
+ 345               	.LM80:
+ 346               	 ;  197 "regtest.c" 1
+ 347 00ba FFE0      		LDI	r31,	15
+ 348               	 ;  0 "" 2
+ 349               	.LM81:
+ 350               	 ;  198 "regtest.c" 1
+ 351 00bc FA11      		CPSE	r31,	r10
+ 352               	 ;  0 "" 2
+ 353               	.LM82:
+ 354               	 ;  199 "regtest.c" 1
+ 355 00be 0092 0000 		STS	xRegTestError, r0
+ 356               	 ;  0 "" 2
+ 357               	.LM83:
+ 358               	 ;  200 "regtest.c" 1
+ 359 00c2 F0E1      		LDI	r31,	16
+ 360               	 ;  0 "" 2
+ 361               	.LM84:
+ 362               	 ;  201 "regtest.c" 1
+ 363 00c4 FB11      		CPSE	r31,	r11
+ 364               	 ;  0 "" 2
+ 365               	.LM85:
+ 366               	 ;  202 "regtest.c" 1
+ 367 00c6 0092 0000 		STS	xRegTestError, r0
+ 368               	 ;  0 "" 2
+ 369               	.LM86:
+ 370               	 ;  203 "regtest.c" 1
+ 371 00ca F1E1      		LDI	r31,	17
+ 372               	 ;  0 "" 2
+ 373               	.LM87:
+ 374               	 ;  204 "regtest.c" 1
+ 375 00cc FC11      		CPSE	r31,	r12
+ 376               	 ;  0 "" 2
+ 377               	.LM88:
+ 378               	 ;  205 "regtest.c" 1
+ 379 00ce 0092 0000 		STS	xRegTestError, r0
+ 380               	 ;  0 "" 2
+ 381               	.LM89:
+ 382               	 ;  206 "regtest.c" 1
+ 383 00d2 F2E1      		LDI	r31,	18
+ 384               	 ;  0 "" 2
+ 385               	.LM90:
+ 386               	 ;  207 "regtest.c" 1
+ 387 00d4 FD11      		CPSE	r31,	r13
+ 388               	 ;  0 "" 2
+ 389               	.LM91:
+ 390               	 ;  208 "regtest.c" 1
+ 391 00d6 0092 0000 		STS	xRegTestError, r0
+ 392               	 ;  0 "" 2
+ 393               	.LM92:
+ 394               	 ;  209 "regtest.c" 1
+ 395 00da F3E1      		LDI	r31,	19
+ 396               	 ;  0 "" 2
+ 397               	.LM93:
+ 398               	 ;  210 "regtest.c" 1
+ 399 00dc FE11      		CPSE	r31,	r14
+ 400               	 ;  0 "" 2
+ 401               	.LM94:
+ 402               	 ;  211 "regtest.c" 1
+ 403 00de 0092 0000 		STS	xRegTestError, r0
+ 404               	 ;  0 "" 2
+ 405               	.LM95:
+ 406               	 ;  212 "regtest.c" 1
+ 407 00e2 F4E1      		LDI	r31,	20
+ 408               	 ;  0 "" 2
+ 409               	.LM96:
+ 410               	 ;  213 "regtest.c" 1
+ 411 00e4 FF11      		CPSE	r31,	r15
+ 412               	 ;  0 "" 2
+ 413               	.LM97:
+ 414               	 ;  214 "regtest.c" 1
+ 415 00e6 0092 0000 		STS	xRegTestError, r0
+ 416               	 ;  0 "" 2
+ 417               	.LM98:
+ 418               	 ;  215 "regtest.c" 1
+ 419 00ea F5E1      		LDI	r31,	21
+ 420               	 ;  0 "" 2
+ 421               	.LM99:
+ 422               	 ;  216 "regtest.c" 1
+ 423 00ec F013      		CPSE	r31,	r16
+ 424               	 ;  0 "" 2
+ 425               	.LM100:
+ 426               	 ;  217 "regtest.c" 1
+ 427 00ee 0092 0000 		STS	xRegTestError, r0
+ 428               	 ;  0 "" 2
+ 429               	.LM101:
+ 430               	 ;  218 "regtest.c" 1
+ 431 00f2 F6E1      		LDI	r31,	22
+ 432               	 ;  0 "" 2
+ 433               	.LM102:
+ 434               	 ;  219 "regtest.c" 1
+ 435 00f4 F113      		CPSE	r31,	r17
+ 436               	 ;  0 "" 2
+ 437               	.LM103:
+ 438               	 ;  220 "regtest.c" 1
+ 439 00f6 0092 0000 		STS	xRegTestError, r0
+ 440               	 ;  0 "" 2
+ 441               	.LM104:
+ 442               	 ;  221 "regtest.c" 1
+ 443 00fa F7E1      		LDI	r31,	23
+ 444               	 ;  0 "" 2
+ 445               	.LM105:
+ 446               	 ;  222 "regtest.c" 1
+ 447 00fc F213      		CPSE	r31,	r18
+ 448               	 ;  0 "" 2
+ 449               	.LM106:
+ 450               	 ;  223 "regtest.c" 1
+ 451 00fe 0092 0000 		STS	xRegTestError, r0
+ 452               	 ;  0 "" 2
+ 453               	.LM107:
+ 454               	 ;  224 "regtest.c" 1
+ 455 0102 F8E1      		LDI	r31,	24
+ 456               	 ;  0 "" 2
+ 457               	.LM108:
+ 458               	 ;  225 "regtest.c" 1
+ 459 0104 F313      		CPSE	r31,	r19
+ 460               	 ;  0 "" 2
+ 461               	.LM109:
+ 462               	 ;  226 "regtest.c" 1
+ 463 0106 0092 0000 		STS	xRegTestError, r0
+ 464               	 ;  0 "" 2
+ 465               	.LM110:
+ 466               	 ;  227 "regtest.c" 1
+ 467 010a F9E1      		LDI	r31,	25
+ 468               	 ;  0 "" 2
+ 469               	.LM111:
+ 470               	 ;  228 "regtest.c" 1
+ 471 010c F413      		CPSE	r31,	r20
+ 472               	 ;  0 "" 2
+ 473               	.LM112:
+ 474               	 ;  229 "regtest.c" 1
+ 475 010e 0092 0000 		STS	xRegTestError, r0
+ 476               	 ;  0 "" 2
+ 477               	.LM113:
+ 478               	 ;  230 "regtest.c" 1
+ 479 0112 FAE1      		LDI	r31,	26
+ 480               	 ;  0 "" 2
+ 481               	.LM114:
+ 482               	 ;  231 "regtest.c" 1
+ 483 0114 F513      		CPSE	r31,	r21
+ 484               	 ;  0 "" 2
+ 485               	.LM115:
+ 486               	 ;  232 "regtest.c" 1
+ 487 0116 0092 0000 		STS	xRegTestError, r0
+ 488               	 ;  0 "" 2
+ 489               	.LM116:
+ 490               	 ;  233 "regtest.c" 1
+ 491 011a FBE1      		LDI	r31,	27
+ 492               	 ;  0 "" 2
+ 493               	.LM117:
+ 494               	 ;  234 "regtest.c" 1
+ 495 011c F613      		CPSE	r31,	r22
+ 496               	 ;  0 "" 2
+ 497               	.LM118:
+ 498               	 ;  235 "regtest.c" 1
+ 499 011e 0092 0000 		STS	xRegTestError, r0
+ 500               	 ;  0 "" 2
+ 501               	.LM119:
+ 502               	 ;  236 "regtest.c" 1
+ 503 0122 FCE1      		LDI	r31,	28
+ 504               	 ;  0 "" 2
+ 505               	.LM120:
+ 506               	 ;  237 "regtest.c" 1
+ 507 0124 F713      		CPSE	r31,	r23
+ 508               	 ;  0 "" 2
+ 509               	.LM121:
+ 510               	 ;  238 "regtest.c" 1
+ 511 0126 0092 0000 		STS	xRegTestError, r0
+ 512               	 ;  0 "" 2
+ 513               	.LM122:
+ 514               	 ;  239 "regtest.c" 1
+ 515 012a FDE1      		LDI	r31,	29
+ 516               	 ;  0 "" 2
+ 517               	.LM123:
+ 518               	 ;  240 "regtest.c" 1
+ 519 012c F813      		CPSE	r31,	r24
+ 520               	 ;  0 "" 2
+ 521               	.LM124:
+ 522               	 ;  241 "regtest.c" 1
+ 523 012e 0092 0000 		STS	xRegTestError, r0
+ 524               	 ;  0 "" 2
+ 525               	.LM125:
+ 526               	 ;  242 "regtest.c" 1
+ 527 0132 FEE1      		LDI	r31,	30
+ 528               	 ;  0 "" 2
+ 529               	.LM126:
+ 530               	 ;  243 "regtest.c" 1
+ 531 0134 F913      		CPSE	r31,	r25
+ 532               	 ;  0 "" 2
+ 533               	.LM127:
+ 534               	 ;  244 "regtest.c" 1
+ 535 0136 0092 0000 		STS	xRegTestError, r0
+ 536               	 ;  0 "" 2
+ 537               	.LM128:
+ 538               	 ;  245 "regtest.c" 1
+ 539 013a FFE1      		LDI	r31,	31
+ 540               	 ;  0 "" 2
+ 541               	.LM129:
+ 542               	 ;  246 "regtest.c" 1
+ 543 013c FA13      		CPSE	r31,	r26
+ 544               	 ;  0 "" 2
+ 545               	.LM130:
+ 546               	 ;  247 "regtest.c" 1
+ 547 013e 0092 0000 		STS	xRegTestError, r0
+ 548               	 ;  0 "" 2
+ 549               	.LM131:
+ 550               	 ;  248 "regtest.c" 1
+ 551 0142 F0E2      		LDI	r31,	32
+ 552               	 ;  0 "" 2
+ 553               	.LM132:
+ 554               	 ;  249 "regtest.c" 1
+ 555 0144 FB13      		CPSE	r31,	r27
+ 556               	 ;  0 "" 2
+ 557               	.LM133:
+ 558               	 ;  250 "regtest.c" 1
+ 559 0146 0092 0000 		STS	xRegTestError, r0
+ 560               	 ;  0 "" 2
+ 561               	.LM134:
+ 562               	 ;  251 "regtest.c" 1
+ 563 014a F1E2      		LDI	r31,	33
+ 564               	 ;  0 "" 2
+ 565               	.LM135:
+ 566               	 ;  252 "regtest.c" 1
+ 567 014c FE13      		CPSE	r31,	r30
+ 568               	 ;  0 "" 2
+ 569               	.LM136:
+ 570               	 ;  253 "regtest.c" 1
+ 571 014e 0092 0000 		STS	xRegTestError, r0
+ 572               	 ;  0 "" 2
+ 573               	/* #NOAPP */
+ 574 0152 00C0      		rjmp .L5
+ 575               	.LFE4:
+ 578               	prvRegisterCheck2:
+ 579               	.LFB5:
+ 580               	.LM137:
+ 581               	/* prologue: function */
+ 582               	/* frame size = 0 */
+ 583               	.LVL1:
+ 584               	.L8:
+ 585               	.LM138:
+ 586               	/* #APP */
+ 587               	 ;  264 "regtest.c" 1
+ 588 0154 F1E0      		LDI	r31,	1
+ 589               	 ;  0 "" 2
+ 590               	.LM139:
+ 591               	 ;  265 "regtest.c" 1
+ 592 0156 0F2E      		MOV	r0,		r31
+ 593               	 ;  0 "" 2
+ 594               	.LM140:
+ 595               	 ;  266 "regtest.c" 1
+ 596 0158 F2E0      		LDI	r31,	2
+ 597               	 ;  0 "" 2
+ 598               	.LM141:
+ 599               	 ;  267 "regtest.c" 1
+ 600 015a 1F2E      		MOV	r1,		r31
+ 601               	 ;  0 "" 2
+ 602               	.LM142:
+ 603               	 ;  268 "regtest.c" 1
+ 604 015c F3E0      		LDI	r31,	3
+ 605               	 ;  0 "" 2
+ 606               	.LM143:
+ 607               	 ;  269 "regtest.c" 1
+ 608 015e 2F2E      		MOV	r2,		r31
+ 609               	 ;  0 "" 2
+ 610               	.LM144:
+ 611               	 ;  270 "regtest.c" 1
+ 612 0160 F4E0      		LDI	r31,	4
+ 613               	 ;  0 "" 2
+ 614               	.LM145:
+ 615               	 ;  271 "regtest.c" 1
+ 616 0162 3F2E      		MOV	r3,		r31
+ 617               	 ;  0 "" 2
+ 618               	.LM146:
+ 619               	 ;  272 "regtest.c" 1
+ 620 0164 F5E0      		LDI	r31,	5
+ 621               	 ;  0 "" 2
+ 622               	.LM147:
+ 623               	 ;  273 "regtest.c" 1
+ 624 0166 4F2E      		MOV	r4,		r31
+ 625               	 ;  0 "" 2
+ 626               	.LM148:
+ 627               	 ;  274 "regtest.c" 1
+ 628 0168 F6E0      		LDI	r31,	6
+ 629               	 ;  0 "" 2
+ 630               	.LM149:
+ 631               	 ;  275 "regtest.c" 1
+ 632 016a 5F2E      		MOV	r5,		r31
+ 633               	 ;  0 "" 2
+ 634               	.LM150:
+ 635               	 ;  276 "regtest.c" 1
+ 636 016c F7E0      		LDI	r31,	7
+ 637               	 ;  0 "" 2
+ 638               	.LM151:
+ 639               	 ;  277 "regtest.c" 1
+ 640 016e 6F2E      		MOV	r6,		r31
+ 641               	 ;  0 "" 2
+ 642               	.LM152:
+ 643               	 ;  278 "regtest.c" 1
+ 644 0170 F8E0      		LDI	r31,	8
+ 645               	 ;  0 "" 2
+ 646               	.LM153:
+ 647               	 ;  279 "regtest.c" 1
+ 648 0172 7F2E      		MOV	r7,		r31
+ 649               	 ;  0 "" 2
+ 650               	.LM154:
+ 651               	 ;  280 "regtest.c" 1
+ 652 0174 F9E0      		LDI	r31,	9
+ 653               	 ;  0 "" 2
+ 654               	.LM155:
+ 655               	 ;  281 "regtest.c" 1
+ 656 0176 8F2E      		MOV	r8,		r31
+ 657               	 ;  0 "" 2
+ 658               	.LM156:
+ 659               	 ;  282 "regtest.c" 1
+ 660 0178 FAE0      		LDI	r31,	10
+ 661               	 ;  0 "" 2
+ 662               	.LM157:
+ 663               	 ;  283 "regtest.c" 1
+ 664 017a 9F2E      		MOV	r9,		r31
+ 665               	 ;  0 "" 2
+ 666               	.LM158:
+ 667               	 ;  284 "regtest.c" 1
+ 668 017c FBE0      		LDI	r31,	11
+ 669               	 ;  0 "" 2
+ 670               	.LM159:
+ 671               	 ;  285 "regtest.c" 1
+ 672 017e AF2E      		MOV	r10,	r31
+ 673               	 ;  0 "" 2
+ 674               	.LM160:
+ 675               	 ;  286 "regtest.c" 1
+ 676 0180 FCE0      		LDI	r31,	12
+ 677               	 ;  0 "" 2
+ 678               	.LM161:
+ 679               	 ;  287 "regtest.c" 1
+ 680 0182 BF2E      		MOV	r11,	r31
+ 681               	 ;  0 "" 2
+ 682               	.LM162:
+ 683               	 ;  288 "regtest.c" 1
+ 684 0184 FDE0      		LDI	r31,	13
+ 685               	 ;  0 "" 2
+ 686               	.LM163:
+ 687               	 ;  289 "regtest.c" 1
+ 688 0186 CF2E      		MOV	r12,	r31
+ 689               	 ;  0 "" 2
+ 690               	.LM164:
+ 691               	 ;  290 "regtest.c" 1
+ 692 0188 FEE0      		LDI	r31,	14
+ 693               	 ;  0 "" 2
+ 694               	.LM165:
+ 695               	 ;  291 "regtest.c" 1
+ 696 018a DF2E      		MOV	r13,	r31
+ 697               	 ;  0 "" 2
+ 698               	.LM166:
+ 699               	 ;  292 "regtest.c" 1
+ 700 018c FFE0      		LDI	r31,	15
+ 701               	 ;  0 "" 2
+ 702               	.LM167:
+ 703               	 ;  293 "regtest.c" 1
+ 704 018e EF2E      		MOV	r14,	r31
+ 705               	 ;  0 "" 2
+ 706               	.LM168:
+ 707               	 ;  294 "regtest.c" 1
+ 708 0190 F0E1      		LDI	r31,	16
+ 709               	 ;  0 "" 2
+ 710               	.LM169:
+ 711               	 ;  295 "regtest.c" 1
+ 712 0192 FF2E      		MOV	r15,	r31
+ 713               	 ;  0 "" 2
+ 714               	.LM170:
+ 715               	 ;  296 "regtest.c" 1
+ 716 0194 01E1      		LDI	r16,	17
+ 717               	 ;  0 "" 2
+ 718               	.LM171:
+ 719               	 ;  297 "regtest.c" 1
+ 720 0196 12E1      		LDI	r17,	18
+ 721               	 ;  0 "" 2
+ 722               	.LM172:
+ 723               	 ;  298 "regtest.c" 1
+ 724 0198 23E1      		LDI	r18,	19
+ 725               	 ;  0 "" 2
+ 726               	.LM173:
+ 727               	 ;  299 "regtest.c" 1
+ 728 019a 34E1      		LDI	r19,	20
+ 729               	 ;  0 "" 2
+ 730               	.LM174:
+ 731               	 ;  300 "regtest.c" 1
+ 732 019c 45E1      		LDI	r20,	21
+ 733               	 ;  0 "" 2
+ 734               	.LM175:
+ 735               	 ;  301 "regtest.c" 1
+ 736 019e 56E1      		LDI	r21,	22
+ 737               	 ;  0 "" 2
+ 738               	.LM176:
+ 739               	 ;  302 "regtest.c" 1
+ 740 01a0 67E1      		LDI	r22,	23
+ 741               	 ;  0 "" 2
+ 742               	.LM177:
+ 743               	 ;  303 "regtest.c" 1
+ 744 01a2 78E1      		LDI	r23,	24
+ 745               	 ;  0 "" 2
+ 746               	.LM178:
+ 747               	 ;  304 "regtest.c" 1
+ 748 01a4 89E1      		LDI	r24,	25
+ 749               	 ;  0 "" 2
+ 750               	.LM179:
+ 751               	 ;  305 "regtest.c" 1
+ 752 01a6 9AE1      		LDI	r25,	26
+ 753               	 ;  0 "" 2
+ 754               	.LM180:
+ 755               	 ;  306 "regtest.c" 1
+ 756 01a8 ABE1      		LDI	r26,	27
+ 757               	 ;  0 "" 2
+ 758               	.LM181:
+ 759               	 ;  307 "regtest.c" 1
+ 760 01aa BCE1      		LDI	r27,	28
+ 761               	 ;  0 "" 2
+ 762               	.LM182:
+ 763               	 ;  308 "regtest.c" 1
+ 764 01ac EDE1      		LDI	r30,	29
+ 765               	 ;  0 "" 2
+ 766               	.LM183:
+ 767               	 ;  310 "regtest.c" 1
+ 768 01ae F1E0      		LDI	r31,	1
+ 769               	 ;  0 "" 2
+ 770               	.LM184:
+ 771               	 ;  311 "regtest.c" 1
+ 772 01b0 F011      		CPSE	r31,	r0
+ 773               	 ;  0 "" 2
+ 774               	.LM185:
+ 775               	 ;  312 "regtest.c" 1
+ 776 01b2 0092 0000 		STS	xRegTestError, r0
+ 777               	 ;  0 "" 2
+ 778               	.LM186:
+ 779               	 ;  313 "regtest.c" 1
+ 780 01b6 F2E0      		LDI	r31,	2
+ 781               	 ;  0 "" 2
+ 782               	.LM187:
+ 783               	 ;  314 "regtest.c" 1
+ 784 01b8 F111      		CPSE	r31,	r1
+ 785               	 ;  0 "" 2
+ 786               	.LM188:
+ 787               	 ;  315 "regtest.c" 1
+ 788 01ba 0092 0000 		STS	xRegTestError, r0
+ 789               	 ;  0 "" 2
+ 790               	.LM189:
+ 791               	 ;  316 "regtest.c" 1
+ 792 01be F3E0      		LDI	r31,	3
+ 793               	 ;  0 "" 2
+ 794               	.LM190:
+ 795               	 ;  317 "regtest.c" 1
+ 796 01c0 F211      		CPSE	r31,	r2
+ 797               	 ;  0 "" 2
+ 798               	.LM191:
+ 799               	 ;  318 "regtest.c" 1
+ 800 01c2 0092 0000 		STS	xRegTestError, r0
+ 801               	 ;  0 "" 2
+ 802               	.LM192:
+ 803               	 ;  319 "regtest.c" 1
+ 804 01c6 F4E0      		LDI	r31,	4
+ 805               	 ;  0 "" 2
+ 806               	.LM193:
+ 807               	 ;  320 "regtest.c" 1
+ 808 01c8 F311      		CPSE	r31,	r3
+ 809               	 ;  0 "" 2
+ 810               	.LM194:
+ 811               	 ;  321 "regtest.c" 1
+ 812 01ca 0092 0000 		STS	xRegTestError, r0
+ 813               	 ;  0 "" 2
+ 814               	.LM195:
+ 815               	 ;  322 "regtest.c" 1
+ 816 01ce F5E0      		LDI	r31,	5
+ 817               	 ;  0 "" 2
+ 818               	.LM196:
+ 819               	 ;  323 "regtest.c" 1
+ 820 01d0 F411      		CPSE	r31,	r4
+ 821               	 ;  0 "" 2
+ 822               	.LM197:
+ 823               	 ;  324 "regtest.c" 1
+ 824 01d2 0092 0000 		STS	xRegTestError, r0
+ 825               	 ;  0 "" 2
+ 826               	.LM198:
+ 827               	 ;  325 "regtest.c" 1
+ 828 01d6 F6E0      		LDI	r31,	6
+ 829               	 ;  0 "" 2
+ 830               	.LM199:
+ 831               	 ;  326 "regtest.c" 1
+ 832 01d8 F511      		CPSE	r31,	r5
+ 833               	 ;  0 "" 2
+ 834               	.LM200:
+ 835               	 ;  327 "regtest.c" 1
+ 836 01da 0092 0000 		STS	xRegTestError, r0
+ 837               	 ;  0 "" 2
+ 838               	.LM201:
+ 839               	 ;  328 "regtest.c" 1
+ 840 01de F7E0      		LDI	r31,	7
+ 841               	 ;  0 "" 2
+ 842               	.LM202:
+ 843               	 ;  329 "regtest.c" 1
+ 844 01e0 F611      		CPSE	r31,	r6
+ 845               	 ;  0 "" 2
+ 846               	.LM203:
+ 847               	 ;  330 "regtest.c" 1
+ 848 01e2 0092 0000 		STS	xRegTestError, r0
+ 849               	 ;  0 "" 2
+ 850               	.LM204:
+ 851               	 ;  331 "regtest.c" 1
+ 852 01e6 F8E0      		LDI	r31,	8
+ 853               	 ;  0 "" 2
+ 854               	.LM205:
+ 855               	 ;  332 "regtest.c" 1
+ 856 01e8 F711      		CPSE	r31,	r7
+ 857               	 ;  0 "" 2
+ 858               	.LM206:
+ 859               	 ;  333 "regtest.c" 1
+ 860 01ea 0092 0000 		STS	xRegTestError, r0
+ 861               	 ;  0 "" 2
+ 862               	.LM207:
+ 863               	 ;  334 "regtest.c" 1
+ 864 01ee F9E0      		LDI	r31,	9
+ 865               	 ;  0 "" 2
+ 866               	.LM208:
+ 867               	 ;  335 "regtest.c" 1
+ 868 01f0 F811      		CPSE	r31,	r8
+ 869               	 ;  0 "" 2
+ 870               	.LM209:
+ 871               	 ;  336 "regtest.c" 1
+ 872 01f2 0092 0000 		STS	xRegTestError, r0
+ 873               	 ;  0 "" 2
+ 874               	.LM210:
+ 875               	 ;  337 "regtest.c" 1
+ 876 01f6 FAE0      		LDI	r31,	10
+ 877               	 ;  0 "" 2
+ 878               	.LM211:
+ 879               	 ;  338 "regtest.c" 1
+ 880 01f8 F911      		CPSE	r31,	r9
+ 881               	 ;  0 "" 2
+ 882               	.LM212:
+ 883               	 ;  339 "regtest.c" 1
+ 884 01fa 0092 0000 		STS	xRegTestError, r0
+ 885               	 ;  0 "" 2
+ 886               	.LM213:
+ 887               	 ;  340 "regtest.c" 1
+ 888 01fe FBE0      		LDI	r31,	11
+ 889               	 ;  0 "" 2
+ 890               	.LM214:
+ 891               	 ;  341 "regtest.c" 1
+ 892 0200 FA11      		CPSE	r31,	r10
+ 893               	 ;  0 "" 2
+ 894               	.LM215:
+ 895               	 ;  342 "regtest.c" 1
+ 896 0202 0092 0000 		STS	xRegTestError, r0
+ 897               	 ;  0 "" 2
+ 898               	.LM216:
+ 899               	 ;  343 "regtest.c" 1
+ 900 0206 FCE0      		LDI	r31,	12
+ 901               	 ;  0 "" 2
+ 902               	.LM217:
+ 903               	 ;  344 "regtest.c" 1
+ 904 0208 FB11      		CPSE	r31,	r11
+ 905               	 ;  0 "" 2
+ 906               	.LM218:
+ 907               	 ;  345 "regtest.c" 1
+ 908 020a 0092 0000 		STS	xRegTestError, r0
+ 909               	 ;  0 "" 2
+ 910               	.LM219:
+ 911               	 ;  346 "regtest.c" 1
+ 912 020e FDE0      		LDI	r31,	13
+ 913               	 ;  0 "" 2
+ 914               	.LM220:
+ 915               	 ;  347 "regtest.c" 1
+ 916 0210 FC11      		CPSE	r31,	r12
+ 917               	 ;  0 "" 2
+ 918               	.LM221:
+ 919               	 ;  348 "regtest.c" 1
+ 920 0212 0092 0000 		STS	xRegTestError, r0
+ 921               	 ;  0 "" 2
+ 922               	.LM222:
+ 923               	 ;  349 "regtest.c" 1
+ 924 0216 FEE0      		LDI	r31,	14
+ 925               	 ;  0 "" 2
+ 926               	.LM223:
+ 927               	 ;  350 "regtest.c" 1
+ 928 0218 FD11      		CPSE	r31,	r13
+ 929               	 ;  0 "" 2
+ 930               	.LM224:
+ 931               	 ;  351 "regtest.c" 1
+ 932 021a 0092 0000 		STS	xRegTestError, r0
+ 933               	 ;  0 "" 2
+ 934               	.LM225:
+ 935               	 ;  352 "regtest.c" 1
+ 936 021e FFE0      		LDI	r31,	15
+ 937               	 ;  0 "" 2
+ 938               	.LM226:
+ 939               	 ;  353 "regtest.c" 1
+ 940 0220 FE11      		CPSE	r31,	r14
+ 941               	 ;  0 "" 2
+ 942               	.LM227:
+ 943               	 ;  354 "regtest.c" 1
+ 944 0222 0092 0000 		STS	xRegTestError, r0
+ 945               	 ;  0 "" 2
+ 946               	.LM228:
+ 947               	 ;  355 "regtest.c" 1
+ 948 0226 F0E1      		LDI	r31,	16
+ 949               	 ;  0 "" 2
+ 950               	.LM229:
+ 951               	 ;  356 "regtest.c" 1
+ 952 0228 FF11      		CPSE	r31,	r15
+ 953               	 ;  0 "" 2
+ 954               	.LM230:
+ 955               	 ;  357 "regtest.c" 1
+ 956 022a 0092 0000 		STS	xRegTestError, r0
+ 957               	 ;  0 "" 2
+ 958               	.LM231:
+ 959               	 ;  358 "regtest.c" 1
+ 960 022e F1E1      		LDI	r31,	17
+ 961               	 ;  0 "" 2
+ 962               	.LM232:
+ 963               	 ;  359 "regtest.c" 1
+ 964 0230 F013      		CPSE	r31,	r16
+ 965               	 ;  0 "" 2
+ 966               	.LM233:
+ 967               	 ;  360 "regtest.c" 1
+ 968 0232 0092 0000 		STS	xRegTestError, r0
+ 969               	 ;  0 "" 2
+ 970               	.LM234:
+ 971               	 ;  361 "regtest.c" 1
+ 972 0236 F2E1      		LDI	r31,	18
+ 973               	 ;  0 "" 2
+ 974               	.LM235:
+ 975               	 ;  362 "regtest.c" 1
+ 976 0238 F113      		CPSE	r31,	r17
+ 977               	 ;  0 "" 2
+ 978               	.LM236:
+ 979               	 ;  363 "regtest.c" 1
+ 980 023a 0092 0000 		STS	xRegTestError, r0
+ 981               	 ;  0 "" 2
+ 982               	.LM237:
+ 983               	 ;  364 "regtest.c" 1
+ 984 023e F3E1      		LDI	r31,	19
+ 985               	 ;  0 "" 2
+ 986               	.LM238:
+ 987               	 ;  365 "regtest.c" 1
+ 988 0240 F213      		CPSE	r31,	r18
+ 989               	 ;  0 "" 2
+ 990               	.LM239:
+ 991               	 ;  366 "regtest.c" 1
+ 992 0242 0092 0000 		STS	xRegTestError, r0
+ 993               	 ;  0 "" 2
+ 994               	.LM240:
+ 995               	 ;  367 "regtest.c" 1
+ 996 0246 F4E1      		LDI	r31,	20
+ 997               	 ;  0 "" 2
+ 998               	.LM241:
+ 999               	 ;  368 "regtest.c" 1
+ 1000 0248 F313      		CPSE	r31,	r19
+ 1001               	 ;  0 "" 2
+ 1002               	.LM242:
+ 1003               	 ;  369 "regtest.c" 1
+ 1004 024a 0092 0000 		STS	xRegTestError, r0
+ 1005               	 ;  0 "" 2
+ 1006               	.LM243:
+ 1007               	 ;  370 "regtest.c" 1
+ 1008 024e F5E1      		LDI	r31,	21
+ 1009               	 ;  0 "" 2
+ 1010               	.LM244:
+ 1011               	 ;  371 "regtest.c" 1
+ 1012 0250 F413      		CPSE	r31,	r20
+ 1013               	 ;  0 "" 2
+ 1014               	.LM245:
+ 1015               	 ;  372 "regtest.c" 1
+ 1016 0252 0092 0000 		STS	xRegTestError, r0
+ 1017               	 ;  0 "" 2
+ 1018               	.LM246:
+ 1019               	 ;  373 "regtest.c" 1
+ 1020 0256 F6E1      		LDI	r31,	22
+ 1021               	 ;  0 "" 2
+ 1022               	.LM247:
+ 1023               	 ;  374 "regtest.c" 1
+ 1024 0258 F513      		CPSE	r31,	r21
+ 1025               	 ;  0 "" 2
+ 1026               	.LM248:
+ 1027               	 ;  375 "regtest.c" 1
+ 1028 025a 0092 0000 		STS	xRegTestError, r0
+ 1029               	 ;  0 "" 2
+ 1030               	.LM249:
+ 1031               	 ;  376 "regtest.c" 1
+ 1032 025e F7E1      		LDI	r31,	23
+ 1033               	 ;  0 "" 2
+ 1034               	.LM250:
+ 1035               	 ;  377 "regtest.c" 1
+ 1036 0260 F613      		CPSE	r31,	r22
+ 1037               	 ;  0 "" 2
+ 1038               	.LM251:
+ 1039               	 ;  378 "regtest.c" 1
+ 1040 0262 0092 0000 		STS	xRegTestError, r0
+ 1041               	 ;  0 "" 2
+ 1042               	.LM252:
+ 1043               	 ;  379 "regtest.c" 1
+ 1044 0266 F8E1      		LDI	r31,	24
+ 1045               	 ;  0 "" 2
+ 1046               	.LM253:
+ 1047               	 ;  380 "regtest.c" 1
+ 1048 0268 F713      		CPSE	r31,	r23
+ 1049               	 ;  0 "" 2
+ 1050               	.LM254:
+ 1051               	 ;  381 "regtest.c" 1
+ 1052 026a 0092 0000 		STS	xRegTestError, r0
+ 1053               	 ;  0 "" 2
+ 1054               	.LM255:
+ 1055               	 ;  382 "regtest.c" 1
+ 1056 026e F9E1      		LDI	r31,	25
+ 1057               	 ;  0 "" 2
+ 1058               	.LM256:
+ 1059               	 ;  383 "regtest.c" 1
+ 1060 0270 F813      		CPSE	r31,	r24
+ 1061               	 ;  0 "" 2
+ 1062               	.LM257:
+ 1063               	 ;  384 "regtest.c" 1
+ 1064 0272 0092 0000 		STS	xRegTestError, r0
+ 1065               	 ;  0 "" 2
+ 1066               	.LM258:
+ 1067               	 ;  385 "regtest.c" 1
+ 1068 0276 FAE1      		LDI	r31,	26
+ 1069               	 ;  0 "" 2
+ 1070               	.LM259:
+ 1071               	 ;  386 "regtest.c" 1
+ 1072 0278 F913      		CPSE	r31,	r25
+ 1073               	 ;  0 "" 2
+ 1074               	.LM260:
+ 1075               	 ;  387 "regtest.c" 1
+ 1076 027a 0092 0000 		STS	xRegTestError, r0
+ 1077               	 ;  0 "" 2
+ 1078               	.LM261:
+ 1079               	 ;  388 "regtest.c" 1
+ 1080 027e FBE1      		LDI	r31,	27
+ 1081               	 ;  0 "" 2
+ 1082               	.LM262:
+ 1083               	 ;  389 "regtest.c" 1
+ 1084 0280 FA13      		CPSE	r31,	r26
+ 1085               	 ;  0 "" 2
+ 1086               	.LM263:
+ 1087               	 ;  390 "regtest.c" 1
+ 1088 0282 0092 0000 		STS	xRegTestError, r0
+ 1089               	 ;  0 "" 2
+ 1090               	.LM264:
+ 1091               	 ;  391 "regtest.c" 1
+ 1092 0286 FCE1      		LDI	r31,	28
+ 1093               	 ;  0 "" 2
+ 1094               	.LM265:
+ 1095               	 ;  392 "regtest.c" 1
+ 1096 0288 FB13      		CPSE	r31,	r27
+ 1097               	 ;  0 "" 2
+ 1098               	.LM266:
+ 1099               	 ;  393 "regtest.c" 1
+ 1100 028a 0092 0000 		STS	xRegTestError, r0
+ 1101               	 ;  0 "" 2
+ 1102               	.LM267:
+ 1103               	 ;  394 "regtest.c" 1
+ 1104 028e FDE1      		LDI	r31,	29
+ 1105               	 ;  0 "" 2
+ 1106               	.LM268:
+ 1107               	 ;  395 "regtest.c" 1
+ 1108 0290 FE13      		CPSE	r31,	r30
+ 1109               	 ;  0 "" 2
+ 1110               	.LM269:
+ 1111               	 ;  396 "regtest.c" 1
+ 1112 0292 0092 0000 		STS	xRegTestError, r0
+ 1113               	 ;  0 "" 2
+ 1114               	/* #NOAPP */
+ 1115 0296 00C0      		rjmp .L8
+ 1116               	.LFE5:
+ 1118               		.data
+ 1119               	.LC0:
+ 1120 0000 5265 6731 		.string	"Reg1"
+ 1120      00
+ 1121               	.LC1:
+ 1122 0005 5265 6732 		.string	"Reg2"
+ 1122      00
+ 1123               		.text
+ 1124               	.global	vStartRegTestTasks
+ 1126               	vStartRegTestTasks:
+ 1127               	.LFB2:
+ 1128               	.LM270:
+ 1129 0298 EF92      		push r14
+ 1130 029a FF92      		push r15
+ 1131 029c 0F93      		push r16
+ 1132               	/* prologue: function */
+ 1133               	/* frame size = 0 */
+ 1134               	.LM271:
+ 1135 029e 80E0      		ldi r24,lo8(gs(prvRegisterCheck1))
+ 1136 02a0 90E0      		ldi r25,hi8(gs(prvRegisterCheck1))
+ 1137 02a2 60E0      		ldi r22,lo8(.LC0)
+ 1138 02a4 70E0      		ldi r23,hi8(.LC0)
+ 1139 02a6 45E5      		ldi r20,lo8(85)
+ 1140 02a8 50E0      		ldi r21,hi8(85)
+ 1141 02aa 20E0      		ldi r18,lo8(0)
+ 1142 02ac 30E0      		ldi r19,hi8(0)
+ 1143 02ae 00E0      		ldi r16,lo8(0)
+ 1144 02b0 EE24      		clr r14
+ 1145 02b2 FF24      		clr r15
+ 1146 02b4 0E94 0000 		call xTaskCreate
+ 1147               	.LM272:
+ 1148 02b8 80E0      		ldi r24,lo8(gs(prvRegisterCheck2))
+ 1149 02ba 90E0      		ldi r25,hi8(gs(prvRegisterCheck2))
+ 1150 02bc 60E0      		ldi r22,lo8(.LC1)
+ 1151 02be 70E0      		ldi r23,hi8(.LC1)
+ 1152 02c0 45E5      		ldi r20,lo8(85)
+ 1153 02c2 50E0      		ldi r21,hi8(85)
+ 1154 02c4 20E0      		ldi r18,lo8(0)
+ 1155 02c6 30E0      		ldi r19,hi8(0)
+ 1156 02c8 0E94 0000 		call xTaskCreate
+ 1157               	/* epilogue start */
+ 1158               	.LM273:
+ 1159 02cc 0F91      		pop r16
+ 1160 02ce FF90      		pop r15
+ 1161 02d0 EF90      		pop r14
+ 1162 02d2 0895      		ret
+ 1163               	.LFE2:
+ 1165               	.global	xRegTestError
+ 1166               	.global	xRegTestError
+ 1167               		.section .bss
+ 1170               	xRegTestError:
+ 1171 0000 00        		.skip 1,0
+ 1220               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 regtest.c
+C:\Users\Tintu\AppData\Local\Temp/cckttuGT.s:2      *ABS*:0000003f __SREG__
+C:\Users\Tintu\AppData\Local\Temp/cckttuGT.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Tintu\AppData\Local\Temp/cckttuGT.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Tintu\AppData\Local\Temp/cckttuGT.s:5      *ABS*:00000034 __CCP__
+C:\Users\Tintu\AppData\Local\Temp/cckttuGT.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Tintu\AppData\Local\Temp/cckttuGT.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Tintu\AppData\Local\Temp/cckttuGT.s:18     .text:00000000 xAreRegTestTasksStillRunning
+C:\Users\Tintu\AppData\Local\Temp/cckttuGT.s:1170   .bss:00000000 xRegTestError
+C:\Users\Tintu\AppData\Local\Temp/cckttuGT.s:37     .text:00000010 prvRegisterCheck1
+C:\Users\Tintu\AppData\Local\Temp/cckttuGT.s:578    .text:00000154 prvRegisterCheck2
+C:\Users\Tintu\AppData\Local\Temp/cckttuGT.s:1126   .text:00000298 vStartRegTestTasks
+
+UNDEFINED SYMBOLS
+xTaskCreate
+__do_copy_data
+__do_clear_bss
